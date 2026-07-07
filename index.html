@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT Nagpur - Department of Computer Science</title>
+    <style>
+        :root {
+            --navy: #0f172a;
+            --blue: #1d4ed8;
+            --sky: #38bdf8;
+            --cream: #f8fafc;
+            --gold: #f59e0b;
+            --text: #e2e8f0;
+            --card-text: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 35%),
+                linear-gradient(135deg, #020617, var(--navy) 55%, #1e3a8a);
+            color: var(--text);
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 48px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel {
+            width: min(1100px, 100%);
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 24px 60px rgba(2, 6, 23, 0.4);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding: 56px 48px 36px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 28px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(245, 158, 11, 0.18);
+            color: #fde68a;
+            letter-spacing: 0.08em;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: clamp(2.2rem, 4vw, 4rem);
+            line-height: 1.1;
+        }
+
+        .lead {
+            margin: 0 0 24px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+            max-width: 60ch;
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
+        }
+
+        .button {
+            text-decoration: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.25);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--gold), #fb7185);
+            color: #111827;
+        }
+
+        .button-secondary {
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--cream);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card,
+        .highlight {
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .card h3,
+        .highlight h2 {
+            margin-top: 0;
+        }
+
+        .card p,
+        .highlight li {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background: linear-gradient(160deg, rgba(56, 189, 248, 0.2), rgba(29, 78, 216, 0.16));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .highlight ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .footer {
+            padding: 18px 48px 32px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 860px) {
+            .hero-content,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                padding: 36px 24px 24px;
+            }
+
+            .footer {
+                padding: 18px 24px 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="panel">
+            <div class="hero-content">
+                <div>
+                    <span class="badge">Case Study 1</span>
+                    <h1>Department of Computer Science and Engineering</h1>
+                    <p class="lead">
+                        Welcome to SIT Nagpur. Our department focuses on strong academic foundations,
+                        practical laboratory learning, innovation, and student development through
+                        projects, seminars, and technical activities.
+                    </p>
+                    <div class="actions">
+                        <a class="button button-primary" href="website.html">View Student Info Page</a>
+                        <a class="button button-secondary" href="#about">Explore Department</a>
+                    </div>
+                    <div class="info-grid" id="about">
+                        <div class="card">
+                            <h3>Vision</h3>
+                            <p>To develop skilled, ethical, and industry-ready computer science graduates.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Mission</h3>
+                            <p>To provide quality education, modern computing exposure, and research culture.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Facilities</h3>
+                            <p>Smart classrooms, programming labs, project guidance, and seminar activities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="highlight">
+                    <h2>Department Highlights</h2>
+                    <ul>
+                        <li>Experienced faculty members and mentor support.</li>
+                        <li>Focus on web development, programming, and problem solving.</li>
+                        <li>Industry-oriented mini projects and practical assignments.</li>
+                        <li>Student clubs, coding events, and placement preparation.</li>
+                    </ul>
+                </aside>
+            </div>
+
+            <div class="footer">
+                SIT Nagpur | Department Webpage linked with Student Information page
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

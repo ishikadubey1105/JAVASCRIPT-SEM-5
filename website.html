@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT Nagpur - Student Information</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --panel: #ffffff;
+            --primary: #0f766e;
+            --secondary: #14b8a6;
+            --accent: #f97316;
+            --text: #0f172a;
+            --muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(20, 184, 166, 0.18), transparent 28%),
+                linear-gradient(180deg, #ecfeff, var(--bg));
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            width: min(980px, calc(100% - 32px));
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 1fr 0.85fr;
+            gap: 26px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.15);
+        }
+
+        button,
+        .back-link {
+            display: inline-block;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .back-link {
+            margin-top: 16px;
+            color: var(--primary);
+            background: rgba(20, 184, 166, 0.1);
+        }
+
+        #output {
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            min-height: 110px;
+        }
+
+        #output h2 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .side-card {
+            background: linear-gradient(180deg, #0f766e, #134e4a);
+            color: white;
+        }
+
+        .side-card ul {
+            padding-left: 18px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 820px) {
+            .wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        function showWelcome() {
+            const name = document.getElementById("name").value.trim();
+            const age = document.getElementById("age").value.trim();
+
+            if (!name || !age) {
+                document.getElementById("output").innerHTML =
+                    "<h2>Incomplete Form</h2><p>Please enter both name and age.</p>";
+                return;
+            }
+
+            document.getElementById("output").innerHTML =
+                "<h2>Welcome, " + name + "!</h2>" +
+                "<p>Your age is: <strong>" + age + "</strong></p>" +
+                "<p>Student profile submitted successfully for SIT Nagpur.</p>";
+
+            console.log("User Name: " + name);
+            console.info("User Age: " + age);
+            console.warn("Demo warning message.");
+            console.error("Demo error message for console output practice.");
+        }
+    </script>
+</head>
+
+<body>
+    <main class="wrapper">
+        <section class="panel">
+            <h1>Student Information</h1>
+            <p class="subtitle">
+                Enter the student details below. This page is connected to the SIT Nagpur
+                department webpage and uses JavaScript to display a welcome alert.
+            </p>
+
+            <label for="name">Enter Name</label>
+            <input type="text" id="name" placeholder="Enter student name">
+
+            <label for="age">Enter Age</label>
+            <input type="number" id="age" placeholder="Enter student age">
+
+            <button onclick="showWelcome(); greet();">
+                Submit
+            </button>
+
+            <div id="output">
+                <h2>Student Details</h2>
+                <p>The submitted information will appear here.</p>
+            </div>
+
+            <a class="back-link" href="index.html">Back to Department Page</a>
+        </section>
+
+        <aside class="panel side-card">
+            <h2>SIT Nagpur</h2>
+         
+
+        </aside>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
