@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billing Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Billing Calculator</h1>
+        <h1>MADE BY ISHIKA DUBEY (24070521023)</h1>
+
+        <div class="layout">
+            <!-- LEFT: Input Form -->
+            <div class="form-card">
+                <h2>Enter Details</h2>
+
+                <label>Customer Name:</label>
+                <input type="text" id="name" placeholder="e.g. Ishika Dubey"><br><br>
+
+                <label>Product Name:</label>
+                <input type="text" id="product" placeholder="e.g. Laptop"><br><br>
+
+                <label>Price per Item (₹):</label>
+                <input type="number" id="price" placeholder="e.g. 5000"><br><br>
+
+                <label>Quantity:</label>
+                <input type="number" id="quantity" placeholder="e.g. 2"><br><br>
+
+                <button onclick="calculateBill()">Generate Bill</button>
+            </div>
+
+            <!-- RIGHT: Output Receipt -->
+            <div class="bill-card">
+                <h2>Generated Bill</h2>
+                <div id="output">
+                    <p class="placeholder-text">Fill in the details and click<br><b>Generate Bill</b> to see the receipt
+                        here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

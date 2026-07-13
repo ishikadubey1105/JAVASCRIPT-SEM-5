@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fff0f3;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* Outer wrapper */
+.wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Page Title */
+h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ff7096;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Side-by-side layout */
+.layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Each card (form + bill) */
+.form-card,
+.bill-card {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #ffe3e8;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(255, 133, 162, 0.1);
+}
+
+.form-card h2,
+.bill-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ff7096;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid #fff0f3;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #8c767e;
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #fff5f6;
+  border: 1.5px solid #ffe3e8;
+  border-radius: 12px;
+  color: #4a3e43;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  background-color: #fff;
+  border-color: #ff85a2;
+  box-shadow: 0 0 0 3px rgba(255, 133, 162, 0.15);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: #ff85a2;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(255, 133, 162, 0.25);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #ff6b8b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 133, 162, 0.3);
+}
+
+/* Placeholder text in bill card before generation */
+.placeholder-text {
+  color: #c4adb4;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 3rem 1rem;
+  line-height: 1.8;
+}
+
+/* Output bill content */
+#output h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ff7096;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1.5px dashed #ffe3e8;
+  text-align: center;
+}
+
+#output p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #8c767e;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 227, 232, 0.5);
+}
+
+#output p b {
+  color: #4a3e43;
+  font-weight: 600;
+}
+
+#output h3 {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background-color: #fff5f6;
+  border: 1px solid #ffe3e8;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff7096;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 650px) {
+  .layout {
+    flex-direction: column;
+  }
+}
