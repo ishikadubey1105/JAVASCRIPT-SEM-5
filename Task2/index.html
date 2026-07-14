@@ -1,49 +1,104 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Billing Calculator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>ShopZone</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>Billing Calculator</h1>
-        <h1>MADE BY ISHIKA DUBEY (24070521023)</h1>
 
-        <div class="layout">
-            <!-- LEFT: Input Form -->
-            <div class="form-card">
-                <h2>Enter Details</h2>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>&#128722; ShopZone</h1>
+    <p>Made by Ishika Dubey | 24070521023</p>
+  </div>
 
-                <label>Customer Name:</label>
-                <input type="text" id="name" placeholder="e.g. Ishika Dubey"><br><br>
+  <!-- PRODUCTS -->
+  <h2 class="section-title">Products</h2>
 
-                <label>Product Name:</label>
-                <input type="text" id="product" placeholder="e.g. Laptop"><br><br>
+  <div class="products">
 
-                <label>Price per Item (₹):</label>
-                <input type="number" id="price" placeholder="e.g. 5000"><br><br>
-
-                <label>Quantity:</label>
-                <input type="number" id="quantity" placeholder="e.g. 2"><br><br>
-
-                <button onclick="calculateBill()">Generate Bill</button>
-            </div>
-
-            <!-- RIGHT: Output Receipt -->
-            <div class="bill-card">
-                <h2>Generated Bill</h2>
-                <div id="output">
-                    <p class="placeholder-text">Fill in the details and click<br><b>Generate Bill</b> to see the receipt
-                        here.</p>
-                </div>
-            </div>
-        </div>
+    <!-- Product 1 -->
+    <div class="card">
+      <div class="icon">&#128187;</div>
+      <h3>Laptop</h3>
+      <p>Intel i5, 8GB RAM</p>
+      <p class="price">Rs. 45,999</p>
+      <input type="number" id="qty1" value="1" min="1" max="10">
+      <button onclick="addToCart('Laptop', 45999, 'qty1')">Add to Cart</button>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Product 2 -->
+    <div class="card">
+      <div class="icon">&#128241;</div>
+      <h3>Smartphone</h3>
+      <p>6.5 inch, 64MP Camera</p>
+      <p class="price">Rs. 15,999</p>
+      <input type="number" id="qty2" value="1" min="1" max="10">
+      <button onclick="addToCart('Smartphone', 15999, 'qty2')">Add to Cart</button>
+    </div>
 
+    <!-- Product 3 -->
+    <div class="card">
+      <div class="icon">&#128085;</div>
+      <h3>T-Shirt</h3>
+      <p>100% Cotton, Round Neck</p>
+      <p class="price">Rs. 399</p>
+      <input type="number" id="qty3" value="1" min="1" max="10">
+      <button onclick="addToCart('T-Shirt', 399, 'qty3')">Add to Cart</button>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="card">
+      <div class="icon">&#9749;</div>
+      <h3>Coffee Maker</h3>
+      <p>12-Cup, Keep Warm</p>
+      <p class="price">Rs. 3,299</p>
+      <input type="number" id="qty4" value="1" min="1" max="10">
+      <button onclick="addToCart('Coffee Maker', 3299, 'qty4')">Add to Cart</button>
+    </div>
+
+  </div>
+
+  <!-- CART SECTION -->
+  <div class="cart-box">
+    <h2>&#128722; Your Cart</h2>
+
+    <!-- Cart items will appear here -->
+    <div id="cart-items">
+      <p id="empty-msg">Cart is empty. Add some items!</p>
+    </div>
+
+    <!-- Cart total -->
+    <p id="cart-total-line" style="display:none;">
+      Total Items: <b id="cart-count">0</b> &nbsp;|&nbsp; Subtotal: <b id="cart-subtotal">Rs. 0</b>
+    </p>
+
+    <!-- Customer details -->
+    <div id="customer-form" style="display:none;">
+      <h3>Your Details</h3>
+      <label>Name: *</label><br>
+      <input type="text" id="cust-name" placeholder="Enter your name"><br><br>
+      <label>Phone:</label><br>
+      <input type="text" id="cust-phone" placeholder="Enter phone"><br><br>
+      <button onclick="generateBill()">Generate Bill</button>
+      <button class="btn-clear" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </div>
+
+  <!-- BILL OUTPUT -->
+  <div class="bill-box" id="bill-box" style="display:none;">
+    <!-- Bill fills here -->
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>&copy; 2026 ShopZone | Ishika Dubey (24070521023)</p>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
 </html>
