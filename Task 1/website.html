@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +69,7 @@
             border: 1px solid #cbd5e1;
             margin-bottom: 18px;
             font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         input:focus {
@@ -91,6 +93,12 @@
         button {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         .back-link {
@@ -99,20 +107,147 @@
             background: rgba(20, 184, 166, 0.1);
         }
 
+        /* ── Output area ── */
         #output {
             margin-top: 22px;
+            min-height: 110px;
+        }
+
+        #output .placeholder {
             padding: 18px;
             border-radius: 16px;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            min-height: 110px;
+            color: var(--muted);
         }
 
-        #output h2 {
+        /* ── Student Table ── */
+        .student-table-wrap {
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .student-table-wrap h2 {
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 14px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        .student-table-wrap h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        table.info-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(15, 118, 110, 0.1);
+            font-size: 0.95rem;
+        }
+
+        table.info-table thead th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: left;
+            padding: 13px 18px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+        }
+
+        table.info-table tbody tr {
+            transition: background 0.15s;
+        }
+
+        table.info-table tbody tr:nth-child(odd) {
+            background: #f0fdfa;
+        }
+
+        table.info-table tbody tr:nth-child(even) {
+            background: #ffffff;
+        }
+
+        table.info-table tbody tr:hover {
+            background: #ccfbf1;
+        }
+
+        table.info-table td {
+            padding: 12px 18px;
+            color: var(--text);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        table.info-table td:first-child {
+            font-weight: 600;
+            color: var(--muted);
+            width: 40%;
+        }
+
+        table.info-table td .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .success-note {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .success-note::before {
+            content: '✓';
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Error state ── */
+        .error-box {
+            padding: 14px 18px;
+            border-radius: 12px;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #be123c;
+            font-weight: 500;
+        }
+
+        /* ── Side card ── */
         .side-card {
             background: linear-gradient(180deg, #0f766e, #134e4a);
             color: white;
@@ -133,17 +268,62 @@
         function showWelcome() {
             const name = document.getElementById("name").value.trim();
             const age = document.getElementById("age").value.trim();
+            const out = document.getElementById("output");
 
             if (!name || !age) {
-                document.getElementById("output").innerHTML =
-                    "<h2>Incomplete Form</h2><p>Please enter both name and age.</p>";
+                out.innerHTML =
+                    '<div class="error-box">⚠ Please fill in both <strong>Name</strong> and <strong>Age</strong> before submitting.</div>';
                 return;
             }
 
-            document.getElementById("output").innerHTML =
-                "<h2>Welcome, " + name + "!</h2>" +
-                "<p>Your age is: <strong>" + age + "</strong></p>" +
-                "<p>Student profile submitted successfully for SIT Nagpur.</p>";
+            // Derive a few extra display values
+            const ageNum = parseInt(age, 10);
+            const year = ageNum >= 21 ? "Final Year" : ageNum >= 20 ? "Third Year" : ageNum >= 19 ? "Second Year" : "First Year";
+            const today = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+
+            out.innerHTML = `
+                <div class="student-table-wrap">
+                    <h2>Student Details</h2>
+                    <table class="info-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Student Name</td>
+                                <td><strong>${name}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td>${age} years</td>
+                            </tr>
+                            <tr>
+                                <td>Institute</td>
+                                <td>SIT Nagpur</td>
+                            </tr>
+                            <tr>
+                                <td>Course</td>
+                                <td>Computer Science &amp; Engineering</td>
+                            </tr>
+                            <tr>
+                                <td>Year</td>
+                                <td>${year}</td>
+                            </tr>
+                            <tr>
+                                <td>Submitted On</td>
+                                <td>${today}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td><span class="badge">✓ Registered</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="success-note">Profile submitted successfully for SIT Nagpur.</p>
+                </div>`;
 
             console.log("User Name: " + name);
             console.info("User Age: " + age);
@@ -173,20 +353,21 @@
             </button>
 
             <div id="output">
-                <h2>Student Details</h2>
-                <p>The submitted information will appear here.</p>
+                <div class="placeholder">
+                    <strong>Student Details</strong><br>
+                    The submitted information will appear here in a table.
+                </div>
             </div>
 
-            <a class="back-link" href="index.html">Back to Department Page</a>
+            <a class="back-link" href="index.html">← Back to Department Page</a>
         </section>
 
         <aside class="panel side-card">
-            <h2>SIT Nagpur</h2>
-         
-
+            <h2>MADE BY ISHIKA DUBEY(24070521023)</h2>
         </aside>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
