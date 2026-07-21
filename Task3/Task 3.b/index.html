@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+
+    <div class="card-header">
+      <h2>Student Login Page</h2>
+      <p class="subtitle">Fill in your details and create a secure password.</p>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" />
+      </div>
+      <div class="form-group">
+        <label for="rollno">Roll Number</label>
+        <input type="text" id="rollno" placeholder="e.g. 24070521023" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" placeholder="Enter your age" min="1" max="120" />
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile Number (10 digits)</label>
+        <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number"
+               maxlength="10" oninput="validateMobile()" />
+        <span class="field-msg" id="mobileMsg"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <div class="input-wrap">
+        <input type="password" id="password" placeholder="Enter your password"
+               oninput="validatePassword()" />
+        <button type="button" class="toggle-btn" onclick="toggleVisibility('password', this)">Show</button>
+      </div>
+    </div>
+
+    <div class="strength-wrap">
+      <div class="strength-bar">
+        <div class="strength-fill" id="strengthFill"></div>
+      </div>
+      <span class="strength-label" id="strengthLabel"></span>
+    </div>
+
+    <ul class="rules">
+      <li id="rule-length"  class="rule">At least 8 characters</li>
+      <li id="rule-upper"   class="rule">At least one uppercase letter (A-Z)</li>
+      <li id="rule-lower"   class="rule">At least one lowercase letter (a-z)</li>
+      <li id="rule-number"  class="rule">At least one number (0-9)</li>
+      <li id="rule-special" class="rule">At least one special character (!@#$...)</li>
+    </ul>
+
+    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Register</button>
+
+    <div class="success-msg" id="successMsg"></div>
+
+    <p class="credit">Made by Ishika Dubey (24070521023)</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
