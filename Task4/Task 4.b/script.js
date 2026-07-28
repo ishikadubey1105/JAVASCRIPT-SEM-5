@@ -1,3 +1,11 @@
+function isUpperLetter(ch) {
+  return ch >= 'A' && ch <= 'Z';
+}
+
+function isDigit(ch) {
+  return ch >= '0' && ch <= '9';
+}
+
 function validateRegistration() {
   const input = document.getElementById("regInput");
   const regNum = input.value.trim();
@@ -15,39 +23,35 @@ function validateRegistration() {
 
     if (regNum.length !== 10) {
       setRule(2, false);
-      throw new Error(`Length must be exactly 10 characters. You entered ${regNum.length}.`);
+      throw new Error("Length must be exactly 10 characters. You entered " + regNum.length + ".");
     }
     setRule(2, true);
 
-    const statePart = regNum.substring(0, 2);
-    if (!/^[A-Z]{2}$/.test(statePart)) {
+    if (!isUpperLetter(regNum[0]) || !isUpperLetter(regNum[1])) {
       setRule(3, false);
-      throw new Error(`First 2 characters (State Code) must be uppercase alphabets. Got: "${statePart}"`);
+      throw new Error("First 2 characters (State Code) must be uppercase letters. Got: " + regNum[0] + regNum[1]);
     }
     setRule(3, true);
 
-    const districtPart = regNum.substring(2, 4);
-    if (!/^[0-9]{2}$/.test(districtPart)) {
+    if (!isDigit(regNum[2]) || !isDigit(regNum[3])) {
       setRule(4, false);
-      throw new Error(`Characters 3–4 (District Code) must be digits. Got: "${districtPart}"`);
+      throw new Error("Characters 3-4 (District Code) must be digits. Got: " + regNum[2] + regNum[3]);
     }
     setRule(4, true);
 
-    const seriesPart = regNum.substring(4, 6);
-    if (!/^[A-Z]{2}$/.test(seriesPart)) {
+    if (!isUpperLetter(regNum[4]) || !isUpperLetter(regNum[5])) {
       setRule(5, false);
-      throw new Error(`Characters 5–6 (Series) must be uppercase alphabets. Got: "${seriesPart}"`);
+      throw new Error("Characters 5-6 (Series) must be uppercase letters. Got: " + regNum[4] + regNum[5]);
     }
     setRule(5, true);
 
-    const vehiclePart = regNum.substring(6, 10);
-    if (!/^[0-9]{4}$/.test(vehiclePart)) {
+    if (!isDigit(regNum[6]) || !isDigit(regNum[7]) || !isDigit(regNum[8]) || !isDigit(regNum[9])) {
       setRule(6, false);
-      throw new Error(`Last 4 characters (Vehicle Number) must be digits. Got: "${vehiclePart}"`);
+      throw new Error("Last 4 characters (Vehicle Number) must be digits. Got: " + regNum[6] + regNum[7] + regNum[8] + regNum[9]);
     }
     setRule(6, true);
 
-    showResult("valid", "Invalid Registration Number!");
+    showResult("valid", "Valid Registration!");
 
   } catch (err) {
     showResult("invalid", err.message);
@@ -73,7 +77,7 @@ function showResult(type, title) {
 }
 
 document.getElementById("regInput").addEventListener("input", function () {
-  document.getElementById("charCount").textContent = `${this.value.length}/10`;
+  document.getElementById("charCount").textContent = this.value.length + "/10";
 
   const btn = document.getElementById("validateBtn");
   btn.textContent = "Validate";
