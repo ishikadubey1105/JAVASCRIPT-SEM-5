@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehicle Registration Validator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="card">
+
+    <div class="top">
+      <p class="tag">Task 4.b — Ishika Dubey · 24070521023</p>
+      <h1>Vehicle<br>Registration</h1>
+      <p class="desc">Enter your 10-character registration number below</p>
+    </div>
+
+    <div class="input-wrap">
+      <input
+        type="text"
+        id="regInput"
+        placeholder="MH12AB1234"
+        maxlength="10"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span id="charCount">0/10</span>
+    </div>
+
+    <button id="validateBtn" onclick="validateRegistration()">Validate</button>
+
+    <div id="resultBox" class="result-box">
+      <span id="resultIcon"></span>
+      <span id="resultTitle"></span>
+    </div>
+
+    <ul class="rules">
+      <li id="rule1"><span></span> Not empty</li>
+      <li id="rule2"><span></span> Exactly 10 chars</li>
+      <li id="rule3"><span></span> [1–2] State — letters</li>
+      <li id="rule4"><span></span> [3–4] District — digits</li>
+      <li id="rule5"><span></span> [5–6] Series — letters</li>
+      <li id="rule6"><span></span> [7–10] Vehicle — digits</li>
+    </ul>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
