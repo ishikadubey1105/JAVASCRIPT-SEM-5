@@ -165,7 +165,9 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
   - **Item Summary** list is generated using `map` (name : item total)
   - **Expensive Products** (price > ₹1000) listed using `filter`
 
-> **Screenshot:** See `image.png` in `Task5/5.1/` folder.
+> **Screenshot:**
+> <img width="1907" height="1022" alt="Screenshot 2026-08-03 214823" src="https://github.com/user-attachments/assets/e13713a2-5be3-4044-b673-14c43a352af2" />
+
 
 ---
 
