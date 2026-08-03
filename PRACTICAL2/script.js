@@ -1,7 +1,3 @@
-﻿// script.js
-// Made by: Ishika Dubey (24070521023)
-
-
 var cart = [];
 
 var GST_RATE = 0.18;
@@ -9,16 +5,13 @@ var GST_RATE = 0.18;
 
 function addToCart(productName, productPrice, qtyId) {
 
-  // Get the quantity from the input box
   var qty = Number(document.getElementById(qtyId).value);
 
-  // Check quantity is valid
   if (qty < 1) {
     alert("Please enter a valid quantity!");
     return;
   }
 
-  // Check if item already exists in cart
   var found = false;
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].name == productName) {
@@ -28,7 +21,6 @@ function addToCart(productName, productPrice, qtyId) {
     }
   }
 
-  // If not found, add as new item
   if (found == false) {
     cart.push({
       name: productName,
@@ -37,7 +29,6 @@ function addToCart(productName, productPrice, qtyId) {
     });
   }
 
-  // Show updated cart
   showCart();
 }
 
@@ -49,7 +40,6 @@ function showCart() {
   var totalLine = document.getElementById("cart-total-line");
   var custForm = document.getElementById("customer-form");
 
-  // If cart is empty
   if (cart.length == 0) {
     cartItems.innerHTML = "<p id='empty-msg'>Cart is empty. Add some items!</p>";
     totalLine.style.display = "none";
@@ -57,7 +47,6 @@ function showCart() {
     return;
   }
 
-  // Build the cart table
   var rows = "";
   var subtotal = 0;
   var totalQty = 0;
@@ -101,7 +90,7 @@ function showCart() {
 
 
 function removeItem(index) {
-  cart.splice(index, 1);   // remove 1 item at position 'index'
+  cart.splice(index, 1);
   showCart();
 }
 
@@ -114,17 +103,14 @@ function clearCart() {
 
 function generateBill() {
 
-  // Get customer details
   var name = document.getElementById("cust-name").value;
   var phone = document.getElementById("cust-phone").value;
 
-  // Name is required
   if (name == "") {
     alert("Please enter your name!");
     return;
   }
 
-  // Calculate bill
   var subtotal = 0;
   for (var i = 0; i < cart.length; i++) {
     subtotal = subtotal + (cart[i].price * cart[i].qty);
@@ -133,7 +119,6 @@ function generateBill() {
   var gstAmount = subtotal * GST_RATE;
   var grandTotal = subtotal + gstAmount;
 
-  // Build item rows for bill
   var billRows = "";
   for (var j = 0; j < cart.length; j++) {
     var item = cart[j];
@@ -148,7 +133,6 @@ function generateBill() {
       "</tr>";
   }
 
-  // Show bill box
   var billBox = document.getElementById("bill-box");
   billBox.style.display = "block";
 
@@ -173,10 +157,8 @@ function generateBill() {
     "<span>Rs. " + grandTotal.toFixed(2) + "</span>" +
     "</div>";
 
-  // Scroll to bill
   billBox.scrollIntoView({ behavior: "smooth" });
 
-  // Log to console
   console.log("Name: " + name);
   console.log("Subtotal: " + subtotal);
   console.log("GST: " + gstAmount.toFixed(2));

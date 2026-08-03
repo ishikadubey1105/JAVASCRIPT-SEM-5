@@ -2,7 +2,6 @@ function calculateGrade() {
   var name  = document.getElementById("name").value;
   var marks = Number(document.getElementById("marks").value);
 
-  // Validation
   if (name === "") {
     alert("Please enter student name.");
     return;
@@ -16,7 +15,6 @@ function calculateGrade() {
     return;
   }
 
-  // Determine grade
   var grade;
   if (marks >= 90) {
     grade = "A+";
@@ -32,10 +30,8 @@ function calculateGrade() {
     grade = "F";
   }
 
-  // Determine result
   var result = (marks >= 50) ? "Pass" : "Fail";
 
-  // Display output
   var out = document.getElementById("output");
   out.innerHTML =
     "<strong>Student Name :</strong> " + name  + "<br>" +
