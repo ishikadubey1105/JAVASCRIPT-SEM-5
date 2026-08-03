@@ -206,7 +206,9 @@ function generateBill() {
   - **Subtotal**, **GST (18%)**, and **Grand Total**
 - Console logs all billing details.
 
-> **Screenshot:** See `screencapture-file-...2026-07-14.png` and `image.png` in this folder.
+> **Screenshot:**
+> <img width="1917" height="957" alt="image" src="https://github.com/user-attachments/assets/a2c90dbb-5d91-497b-874a-58d6ed7765a9" />
+
 
 ---
 
@@ -227,6 +229,8 @@ Billing Calculator Webpage for a Shopping App using JavaScript, HTML, and CSS
 - Customer details (Name, Phone, Address) are accepted.
 - Quantities per product are selected.
 - On **Generate Bill**: GST calculated at 18%, Grand Total displayed in a formatted invoice.
+<img width="1920" height="1695" alt="image" src="https://github.com/user-attachments/assets/e4e78708-4452-41cd-9936-273c1b034c51" />
+
 
 ---
 
