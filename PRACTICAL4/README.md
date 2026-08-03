@@ -111,7 +111,9 @@ function checkPalindrome() {
 - Result displayed: `"racecar" is a Palindrome! ✅` or `"hello" is NOT a Palindrome ❌`.
 - If input is empty, a `try-catch` block catches the thrown Error and shows an alert.
 
-> **Screenshot:** See `image.png` in `Task4.a/` folder.
+> **Screenshot:**
+> <img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/539e7206-cd4f-48f1-9bb3-605bac68d2dc" />
+
 
 ---
 
@@ -283,7 +285,9 @@ document.getElementById("regInput").addEventListener("keydown", function (e) {
   - The button changes to ✓ Valid or ✗ Error message.
 - Format: `[2 state letters][2 district digits][2 series letters][4 vehicle digits]` — e.g., `MH12AB1234`.
 
-> **Screenshot:** See `image.png` in `Task 4.b/` folder.
+> **Screenshot:**
+> <img width="1917" height="1013" alt="image" src="https://github.com/user-attachments/assets/26eb110b-699b-44da-b154-3cd3cc12a759" />
+
 
 ---
 
