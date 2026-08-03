@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="header">
+      <h1>Shopping Cart</h1>
+      <p class="student-info">Ishika Dubey &nbsp;|&nbsp; PRN: 24070521023</p>
+    </div>
+
+    <div class="layout">
+
+      <!-- LEFT: cart table -->
+      <div class="panel left-panel">
+        <p class="panel-title">Items</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartBody"></tbody>
+        </table>
+        <p id="emptyMsg" class="empty">No items yet.</p>
+      </div>
+
+      <!-- RIGHT: add form + summary -->
+      <div class="panel right-panel">
+
+        <p class="panel-title">Add Item</p>
+        <div class="form-group">
+          <input id="itemName"  type="text"   placeholder="Item name" />
+          <input id="itemPrice" type="number" placeholder="Price (₹)" min="0" />
+          <input id="itemQty"   type="number" placeholder="Qty" min="1" value="1" />
+          <button onclick="addItem()">Add</button>
+        </div>
+
+        <hr />
+
+        <p class="panel-title">Discount Tiers</p>
+        <ul class="tiers" id="tierList">
+          <li id="t0">Under ₹200 &nbsp;→&nbsp; No discount</li>
+          <li id="t1">₹200 – ₹499 &nbsp;→&nbsp; 5% off</li>
+          <li id="t2">₹500 – ₹999 &nbsp;→&nbsp; 10% off</li>
+          <li id="t3">₹1000 &amp; above &nbsp;→&nbsp; 20% off</li>
+        </ul>
+
+        <hr />
+
+        <div class="summary">
+          <div class="row"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
+          <div class="row green" id="discRow" style="display:none">
+            <span id="discLabel">Discount</span>
+            <span id="discAmt">-₹0.00</span>
+          </div>
+          <div class="row bold"><span>Total</span><span id="total">₹0.00</span></div>
+        </div>
+
+        <button class="checkout" onclick="checkout()">Checkout</button>
+
+        <p id="msg" class="msg"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
