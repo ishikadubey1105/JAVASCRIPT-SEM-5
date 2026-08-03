@@ -1,84 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cart Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+    }
+
+    .container {
+      width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    input {
+      padding: 8px;
+      width: 150px;
+      margin: 5px;
+    }
+
+    button {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    th {
+      background: #007bff;
+      color: white;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 
 <body>
+  <h2>Shopping Cart Calculator</h2>
+  <input type="text" id="name" placeholder="Product Name">
+  <input type="number" id="price" placeholder="Price">
+  <input type="number" id="qty" placeholder="Quantity">
 
-  <div class="page">
+  <button onclick="addProduct()">Add Product</button>
+  <table id="cartTable">
+    <tr>
+      <th>ID</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </table>
 
-    <div class="header">
-      <h1>Shopping Cart</h1>
-      <p class="student-info">Ishika Dubey &nbsp;|&nbsp; PRN: 24070521023</p>
-    </div>
-
-    <div class="layout">
-
-
-      <div class="panel left-panel">
-        <p class="panel-title">Items</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Subtotal</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="cartBody"></tbody>
-        </table>
-        <p id="emptyMsg" class="empty">No items yet.</p>
-      </div>
-
-
-
-      <div class="panel right-panel">
-
-        <p class="panel-title">Add Item</p>
-        <div class="form-group">
-          <input id="itemName" type="text" placeholder="Item name" />
-          <input id="itemPrice" type="number" placeholder="Price (₹)" min="0" />
-          <input id="itemQty" type="number" placeholder="Qty" min="1" value="1" />
-          <button onclick="addItem()">Add</button>
-        </div>
-
-        <hr />
-
-        <p class="panel-title">Discount Tiers</p>
-        <ul class="tiers" id="tierList">
-          <li id="t0">Under ₹200 &nbsp;→&nbsp; No discount</li>
-          <li id="t1">₹200 – ₹499 &nbsp;→&nbsp; 5% off</li>
-          <li id="t2">₹500 – ₹999 &nbsp;→&nbsp; 10% off</li>
-          <li id="t3">₹1000 &amp; above &nbsp;→&nbsp; 20% off</li>
-        </ul>
-
-        <hr />
-
-        <div class="summary">
-          <div class="row"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
-          <div class="row green" id="discRow" style="display:none">
-            <span id="discLabel">Discount</span>
-            <span id="discAmt">-₹0.00</span>
-          </div>
-          <div class="row bold"><span>Total</span><span id="total">₹0.00</span></div>
-        </div>
-
-        <button class="checkout" onclick="checkout()">Checkout</button>
-
-        <p id="msg" class="msg"></p>
-      </div>
-
-    </div>
+  <div class="result" id="result">
+    <h3>Item Summary</h3>
+    <ul id="summary"></ul>
+    <h3>Expensive Products (Price > 1000)</h3>
+    <ul id="expensive"></ul>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    let cart = [];
+    function addProduct() {
+      let name = document.getElementById("name").value;
+      let price = parseFloat(document.getElementById("price").value);
+      let qty = parseInt(document.getElementById("qty").value);
+
+      if (name == "" || isNaN(price) || isNaN(qty)) {
+        alert("Please enter all fields");
+        return;
+      }
+
+      let product = {
+        id: cart.length + 1,
+        name: name,
+        price: price,
+        quantity: qty
+      };
+
+      cart.push(product);
+      displayCart();
+      document.getElementById("name").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("qty").value = "";
+    }
+
+    function displayCart() {
+      let table = document.getElementById("cartTable");
+      table.innerHTML = `
+                <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                </tr>
+            `;
+
+      cart.forEach(function (item) {
+        table.innerHTML += `
+                <tr> 
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>${item.price * item.quantity}</td>
+                </tr>
+                `;
+      });
+
+      let total = cart.reduce(function (sum, item) {
+        return sum + (item.price * item.quantity);
+      }, 0);
+
+      let discount = 0;
+
+      if (total >= 50000)
+        discount = total * 0.20;
+
+      else if (total >= 20000)
+        discount = total * 0.10;
+
+      else if (total >= 5000)
+        discount = total * 0.05;
+
+      let finalAmount = total - discount;
+
+      document.getElementById("result").innerHTML =
+        `
+            <b>Total Amount :</b> ${total}<br> 
+            <b>Discount :</b> ${discount.toFixed(2)}<br>
+            <b>Final Amount :</b> ${finalAmount.toFixed(2)}
+            `;
+
+      let summary = document.getElementById("summary");
+      summary.innerHTML = "";
+      cart.map(function (item) {
+        summary.innerHTML +=
+          `<li>${item.name} : ${item.price * item.quantity}</li>`;
+      });
+
+      let expensive = document.getElementById("expensive");
+      expensive.innerHTML = "";
+
+      let exp = cart.filter(function (item) {
+        return item.price > 1000;
+      });
+
+      exp.forEach(function (item) {
+        expensive.innerHTML += `<li>${item.name}</li>`;
+      });
+
+    }
+
+  </script>
 </body>
 
 </html>
