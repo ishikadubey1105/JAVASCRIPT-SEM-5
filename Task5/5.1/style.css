@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -11,7 +16,7 @@ html, body {
   font-size: 14px;
 }
 
-/* ── Page wrapper fills viewport ── */
+
 .page {
   height: 100vh;
   display: flex;
@@ -46,7 +51,7 @@ h1 {
   overflow: hidden;
 }
 
-/* ── Shared panel style ── */
+
 .panel {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -65,7 +70,6 @@ h1 {
   color: #9ca3af;
 }
 
-/* ── Left panel (cart table) ── */
 .left-panel {
   flex: 1.6;
   overflow: hidden;
@@ -85,8 +89,14 @@ h1 {
   border-bottom: 1px solid #e5e7eb;
 }
 
-.left-panel tbody tr { border-bottom: 1px solid #f3f4f6; }
-.left-panel tbody td { padding: 8px 8px; color: #374151; }
+.left-panel tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.left-panel tbody td {
+  padding: 8px 8px;
+  color: #374151;
+}
 
 .empty {
   color: #9ca3af;
@@ -105,15 +115,18 @@ h1 {
   transition: color 0.15s, background 0.15s;
 }
 
-.del:hover { color: #ef4444; background: #fef2f2; }
+.del:hover {
+  color: #ef4444;
+  background: #fef2f2;
+}
 
-/* ── Right panel ── */
+
 .right-panel {
   flex: 1;
   gap: 12px;
 }
 
-/* ── Add item form ── */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -132,8 +145,14 @@ h1 {
   transition: border-color 0.15s;
 }
 
-.form-group input::placeholder { color: #c4c9d4; }
-.form-group input:focus { border-color: #6366f1; background: #fff; }
+.form-group input::placeholder {
+  color: #c4c9d4;
+}
+
+.form-group input:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
 
 .form-group button {
   padding: 9px;
@@ -147,12 +166,17 @@ h1 {
   transition: background 0.15s;
 }
 
-.form-group button:hover { background: #374151; }
+.form-group button:hover {
+  background: #374151;
+}
 
-/* ── Divider ── */
-hr { border: none; border-top: 1px solid #e5e7eb; }
 
-/* ── Discount tiers ── */
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+
 .tiers {
   list-style: none;
   display: flex;
@@ -174,7 +198,7 @@ hr { border: none; border-top: 1px solid #e5e7eb; }
   font-weight: 500;
 }
 
-/* ── Summary ── */
+
 .summary {
   display: flex;
   flex-direction: column;
@@ -188,8 +212,15 @@ hr { border: none; border-top: 1px solid #e5e7eb; }
   color: #6b7280;
 }
 
-.row.green  { color: #16a34a; }
-.row.bold   { font-weight: 600; color: #111; font-size: 0.95rem; }
+.row.green {
+  color: #16a34a;
+}
+
+.row.bold {
+  font-weight: 600;
+  color: #111;
+  font-size: 0.95rem;
+}
 
 /* ── Checkout button ── */
 .checkout {
@@ -206,7 +237,9 @@ hr { border: none; border-top: 1px solid #e5e7eb; }
   margin-top: auto;
 }
 
-.checkout:hover { background: #4f46e5; }
+.checkout:hover {
+  background: #4f46e5;
+}
 
 /* ── Status message ── */
 .msg {

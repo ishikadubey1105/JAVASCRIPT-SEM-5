@@ -1,12 +1,7 @@
 let cart = [];
 let nextId = 1;
 
-function getDiscountPercent(subtotal) {
-  if (subtotal >= 1000) return 20;
-  if (subtotal >= 500)  return 10;
-  if (subtotal >= 200)  return 5;
-  return 0;
-}
+const DISCOUNT = 10;
 
 function addItem() {
   const name  = document.getElementById("itemName").value.trim();
@@ -43,53 +38,30 @@ function render() {
     emptyMsg.style.display = "block";
   } else {
     emptyMsg.style.display = "none";
-    cart.forEach(item => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
+    tbody.innerHTML = cart.map(item => `
+      <tr>
         <td>${item.name}</td>
         <td>${item.qty}</td>
         <td>₹${item.price.toFixed(2)}</td>
         <td>₹${item.subtotal.toFixed(2)}</td>
         <td><button class="del" onclick="removeItem(${item.id})">✕</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
+      </tr>
+    `).join("");
   }
 
   const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
-  const discPct  = getDiscountPercent(subtotal);
-  const discAmt  = (subtotal * discPct) / 100;
+  const discAmt  = (subtotal * DISCOUNT) / 100;
   const total    = subtotal - discAmt;
 
   document.getElementById("subtotal").textContent = `₹${subtotal.toFixed(2)}`;
+  document.getElementById("discAmt").textContent  = `-₹${discAmt.toFixed(2)}`;
   document.getElementById("total").textContent    = `₹${total.toFixed(2)}`;
-
-  const discRow = document.getElementById("discRow");
-  if (discAmt > 0) {
-    discRow.style.display = "flex";
-    document.getElementById("discLabel").textContent = `Discount (${discPct}% off)`;
-    document.getElementById("discAmt").textContent   = `-₹${discAmt.toFixed(2)}`;
-  } else {
-    discRow.style.display = "none";
-  }
-
-  highlightTier(discPct);
-}
-
-function highlightTier(discPct) {
-  const map = { 0: "t0", 5: "t1", 10: "t2", 20: "t3" };
-  ["t0", "t1", "t2", "t3"].forEach(id => {
-    document.getElementById(id).classList.remove("active-tier");
-  });
-  const activeId = map[discPct];
-  if (activeId) document.getElementById(activeId).classList.add("active-tier");
 }
 
 function checkout() {
   if (cart.length === 0) { showMsg("Cart is empty!", "red"); return; }
   const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
-  const discPct  = getDiscountPercent(subtotal);
-  const total    = subtotal - (subtotal * discPct / 100);
+  const total    = subtotal - (subtotal * DISCOUNT / 100);
   showMsg(`Order placed! Total paid: ₹${total.toFixed(2)}`, "green");
   cart = [];
   render();

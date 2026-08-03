@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cart Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <div class="page">
@@ -17,7 +19,7 @@
 
     <div class="layout">
 
-      <!-- LEFT: cart table -->
+
       <div class="panel left-panel">
         <p class="panel-title">Items</p>
         <table>
@@ -35,14 +37,15 @@
         <p id="emptyMsg" class="empty">No items yet.</p>
       </div>
 
-      <!-- RIGHT: add form + summary -->
+
+
       <div class="panel right-panel">
 
         <p class="panel-title">Add Item</p>
         <div class="form-group">
-          <input id="itemName"  type="text"   placeholder="Item name" />
+          <input id="itemName" type="text" placeholder="Item name" />
           <input id="itemPrice" type="number" placeholder="Price (₹)" min="0" />
-          <input id="itemQty"   type="number" placeholder="Qty" min="1" value="1" />
+          <input id="itemQty" type="number" placeholder="Qty" min="1" value="1" />
           <button onclick="addItem()">Add</button>
         </div>
 
@@ -77,4 +80,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
