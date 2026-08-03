@@ -166,8 +166,7 @@ function greet() {
   - A student details table is dynamically generated (Internal JS).
   - Browser console shows output from: `console.log`, `console.info`, `console.warn`, `console.error`, `console.table`, `console.time`.
 
-> **Screenshot:**
-> <img width="1917" height="1078" alt="image" src="https://github.com/user-attachments/assets/3183ee50-c821-488f-bf45-dfa5c2fec37b" />
+
 
 
 
@@ -190,6 +189,10 @@ The case study demonstrates all three JavaScript inclusion methods in one projec
 ## Output
 - Department homepage links to the student information page.
 - On form submission: Welcome alert fires, student table is rendered dynamically, all console methods execute.
+> **Screenshot:**
+> <img width="1917" height="1078" alt="image" src="https://github.com/user-attachments/assets/3183ee50-c821-488f-bf45-dfa5c2fec37b" />
+<img width="1917" height="983" alt="image" src="https://github.com/user-attachments/assets/22ff891f-2f81-4318-8f9b-ebbbed5431e8" />
+
 
 ---
 
