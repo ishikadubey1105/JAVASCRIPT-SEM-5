@@ -2,7 +2,7 @@
 
 **Student Name:** Ishika Dubey
 **PRN:** 24070521023
-**File Path:** `Task 1/index.html` | `Task 1/website.html` | `Task 1/script.js`
+**File Path:** `PRACTICAL1/index.html` | `PRACTICAL1/website.html` | `PRACTICAL1/script.js`
 
 ---
 
@@ -27,7 +27,6 @@ Demonstration of Inline, Internal and External JavaScript, Console Methods and U
     <meta charset="UTF-8">
     <title>SIT Nagpur - Department of Computer Science</title>
     <style>
-        /* Full CSS in source file — dark-themed hero layout */
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #020617, #0f172a 55%, #1e3a8a);
@@ -66,12 +65,12 @@ Demonstration of Inline, Internal and External JavaScript, Console Methods and U
             </div>
         </div>
     </section>
-    <script src="script.js"></script>  <!-- EXTERNAL JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
 ```
 
-### `script.js` — External JavaScript (Console Methods Demo)
+### `script.js` — External JavaScript
 ```js
 function greet() {
     alert("Welcome to SIT NAGPUR");
@@ -89,7 +88,6 @@ function greet() {
 <head>
     <meta charset="UTF-8">
     <title>SIT Nagpur - Student Information</title>
-    <!-- INTERNAL JavaScript -->
     <script>
         function showWelcome() {
             const name = document.getElementById("name").value.trim();
@@ -139,7 +137,6 @@ function greet() {
             <label for="age">Enter Age</label>
             <input type="number" id="age" placeholder="Enter student age">
 
-            <!-- INLINE JavaScript: onclick triggers both internal + external functions -->
             <button onclick="showWelcome(); greet();">Submit</button>
 
             <div id="output">
@@ -166,9 +163,9 @@ function greet() {
   - A student details table is dynamically generated (Internal JS).
   - Browser console shows output from: `console.log`, `console.info`, `console.warn`, `console.error`, `console.table`, `console.time`.
 
-
-
-
+> **Screenshot:**
+> <img width="1917" height="1078" alt="image" src="https://github.com/user-attachments/assets/3183ee50-c821-488f-bf45-dfa5c2fec37b" />
+<img width="1917" height="983" alt="image" src="https://github.com/user-attachments/assets/22ff891f-2f81-4318-8f9b-ebbbed5431e8" />
 
 ---
 
@@ -189,10 +186,6 @@ The case study demonstrates all three JavaScript inclusion methods in one projec
 ## Output
 - Department homepage links to the student information page.
 - On form submission: Welcome alert fires, student table is rendered dynamically, all console methods execute.
-> **Screenshot:**
-> <img width="1917" height="1078" alt="image" src="https://github.com/user-attachments/assets/3183ee50-c821-488f-bf45-dfa5c2fec37b" />
-<img width="1917" height="983" alt="image" src="https://github.com/user-attachments/assets/22ff891f-2f81-4318-8f9b-ebbbed5431e8" />
-
 
 ---
 

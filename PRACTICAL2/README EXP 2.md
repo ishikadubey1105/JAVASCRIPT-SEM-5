@@ -2,7 +2,7 @@
 
 **Student Name:** Ishika Dubey
 **PRN:** 24070521023
-**File Path:** `Task2/index.html` | `Task2/script.js` | `Task2/style.css`
+**File Path:** `PRACTICAL2/index.html` | `PRACTICAL2/script.js` | `PRACTICAL2/style.css`
 
 ---
 
@@ -30,7 +30,6 @@ Demonstration of var, let, const, Template Literals, Destructuring and Billing C
 </head>
 <body>
 
-  <!-- TOP BAR -->
   <div class="topbar">
     <h2>&#128722; ShopZone</h2>
     <p>Made by Ishika Dubey | 24070521023</p>
@@ -39,7 +38,6 @@ Demonstration of var, let, const, Template Literals, Destructuring and Billing C
   <h2 class="page-heading">Our Products</h2>
 
   <div class="product-list">
-    <!-- Product 1 -->
     <div class="product-card">
       <div class="product-icon">&#128187;</div>
       <div class="product-info">
@@ -53,12 +51,8 @@ Demonstration of var, let, const, Template Literals, Destructuring and Billing C
         <input type="hidden" id="price1" value="45999">
       </div>
     </div>
-    <!-- Products 2–8: Wireless Earbuds, Smartphone, Casual T-Shirt,
-         Denim Jeans, Running Shoes, Coffee Maker, Python Book
-         (same card structure, see source file) -->
   </div>
 
-  <!-- CUSTOMER DETAILS -->
   <div class="customer-section">
     <h3>Enter Your Details</h3>
     <label>Name:</label>
@@ -71,7 +65,6 @@ Demonstration of var, let, const, Template Literals, Destructuring and Billing C
     <button onclick="clearAll()" class="btn-clear">Clear</button>
   </div>
 
-  <!-- BILL OUTPUT -->
   <div class="bill-section" id="bill-section"></div>
 
   <div class="footer">
@@ -85,13 +78,11 @@ Demonstration of var, let, const, Template Literals, Destructuring and Billing C
 
 ### `script.js` — JavaScript (var, let, const, Template Literals, Destructuring)
 ```js
-// Made by: Ishika Dubey (24070521023)
-
-var cart = [];          // var — function-scoped, can be updated
-var GST_RATE = 0.18;    // var — global scope
+var cart = [];
+var GST_RATE = 0.18;
 
 function addToCart(productName, productPrice, qtyId) {
-  var qty = Number(document.getElementById(qtyId).value);  // var
+  var qty = Number(document.getElementById(qtyId).value);
 
   if (qty < 1) { alert("Please enter a valid quantity!"); return; }
 
@@ -144,7 +135,7 @@ function showCart() {
 }
 
 function removeItem(index) { cart.splice(index, 1); showCart(); }
-function clearCart()       { cart = []; showCart(); document.getElementById("bill-box").style.display = "none"; }
+function clearCart() { cart = []; showCart(); document.getElementById("bill-box").style.display = "none"; }
 
 function generateBill() {
   var name  = document.getElementById("cust-name").value;
@@ -157,20 +148,17 @@ function generateBill() {
     subtotal += cart[i].price * cart[i].qty;
   }
 
-  // const — cannot be reassigned
   const gstAmount  = subtotal * GST_RATE;
   const grandTotal = subtotal + gstAmount;
 
-  // Destructuring — extracting from object
   var billRows = "";
   for (var j = 0; j < cart.length; j++) {
-    const { name: pName, price, qty } = cart[j];   // Object Destructuring
+    const { name: pName, price, qty } = cart[j];
     const total = price * qty;
     billRows += `<tr><td>${j+1}</td><td>${pName}</td><td>${qty}</td>
                  <td>Rs. ${price}</td><td>Rs. ${total}</td></tr>`;
   }
 
-  // Template Literals — backtick strings with ${} expressions
   const billBox = document.getElementById("bill-box");
   billBox.style.display = "block";
   billBox.innerHTML = `
@@ -209,7 +197,6 @@ function generateBill() {
 > **Screenshot:**
 > <img width="1917" height="957" alt="image" src="https://github.com/user-attachments/assets/a2c90dbb-5d91-497b-874a-58d6ed7765a9" />
 
-
 ---
 
 ## Case Study Title
@@ -230,7 +217,6 @@ Billing Calculator Webpage for a Shopping App using JavaScript, HTML, and CSS
 - Quantities per product are selected.
 - On **Generate Bill**: GST calculated at 18%, Grand Total displayed in a formatted invoice.
 <img width="1920" height="1695" alt="image" src="https://github.com/user-attachments/assets/e4e78708-4452-41cd-9936-273c1b034c51" />
-
 
 ---
 

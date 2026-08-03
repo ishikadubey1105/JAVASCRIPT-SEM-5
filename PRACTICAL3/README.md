@@ -2,7 +2,7 @@
 
 **Student Name:** Ishika Dubey
 **PRN:** 24070521023
-**File Path:** `Task3/Task 3.a/index.html` | `Task3/Task 3.a/script.js` | `Task3/Task 3.b/index.html` | `Task3/Task 3.b/script.js`
+**File Path:** `PRACTICAL3/Task 3.a/index.html` | `PRACTICAL3/Task 3.a/script.js` | `PRACTICAL3/Task 3.b/index.html` | `PRACTICAL3/Task 3.b/script.js`
 
 ---
 
@@ -60,14 +60,12 @@ function calculateGrade() {
   var name  = document.getElementById("name").value;
   var marks = Number(document.getElementById("marks").value);
 
-  // Form Validation
   if (name === "") { alert("Please enter student name."); return; }
   if (document.getElementById("marks").value === "") {
     alert("Please enter overall marks."); return;
   }
   if (marks < 0 || marks > 100) { alert("Marks must be between 0 and 100."); return; }
 
-  // Control Structures — if-else-if ladder
   var grade;
   if (marks >= 90)      { grade = "A+"; }
   else if (marks >= 80) { grade = "A";  }
@@ -76,7 +74,6 @@ function calculateGrade() {
   else if (marks >= 50) { grade = "D";  }
   else                  { grade = "F";  }
 
-  // Ternary operator (conditional expression)
   var result = (marks >= 50) ? "Pass" : "Fail";
 
   var out = document.getElementById("output");
@@ -99,7 +96,6 @@ function calculateGrade() {
 
 > **Screenshot:**
 > <img width="1917" height="1023" alt="image" src="https://github.com/user-attachments/assets/c3066b89-182e-43a4-9c9e-4e9ada550d91" />
-
 
 ---
 
@@ -183,13 +179,11 @@ Password Validation Webpage using Form Validation and Control Structures
 
 #### `Task 3.b/script.js`
 ```js
-// Helper functions (character type checks — manual, no regex)
 function isUpperCase(ch) { return ch.charCodeAt(0) >= 65 && ch.charCodeAt(0) <= 90; }
 function isLowerCase(ch) { return ch.charCodeAt(0) >= 97 && ch.charCodeAt(0) <= 122; }
 function isDigit(ch)     { return ch.charCodeAt(0) >= 48 && ch.charCodeAt(0) <= 57; }
 function isSpecial(ch)   { return !isUpperCase(ch) && !isLowerCase(ch) && !isDigit(ch); }
 
-// Password rule definitions
 var rules = [
   { id: "rule-length",  check: function(p) { return p.length >= 8; } },
   { id: "rule-upper",   check: function(p) { for(var i=0;i<p.length;i++) if(isUpperCase(p[i])) return true; return false; } },
@@ -198,7 +192,6 @@ var rules = [
   { id: "rule-special", check: function(p) { for(var i=0;i<p.length;i++) if(isSpecial(p[i]))   return true; return false; } }
 ];
 
-// Strength indicator levels
 var strengthLevels = [
   { label: "",       color: "#aaa",    width: "0%"   },
   { label: "Weak",   color: "#cc0000", width: "25%"  },
@@ -207,7 +200,6 @@ var strengthLevels = [
   { label: "Strong", color: "#007700", width: "100%" }
 ];
 
-// Real-time password validation (control structure — for loop + if-else)
 function validatePassword() {
   var pwd = document.getElementById("password").value;
   var passed = 0;
@@ -223,7 +215,6 @@ function validatePassword() {
   document.getElementById("strengthLabel").textContent     = s.label;
 }
 
-// Mobile validation (strips non-digits, limits to 10)
 function validateMobile() {
   var inputEl = document.getElementById("mobile");
   var msgEl   = document.getElementById("mobileMsg");
@@ -246,7 +237,6 @@ function toggleVisibility(fieldId, btn) {
   else { inputEl.type = "password"; btn.textContent = "Show"; }
 }
 
-// Form submission with full validation (control structures: if-else chain)
 function handleSubmit() {
   var nameVal   = document.getElementById("name").value;
   var rollVal   = document.getElementById("rollno").value;
@@ -254,17 +244,15 @@ function handleSubmit() {
   var mobileVal = document.getElementById("mobile").value;
   var pwdVal    = document.getElementById("password").value;
 
-  if (nameVal.length === 0)   { alert("Please enter your Full Name.");   return; }
-  if (rollVal.length === 0)   { alert("Please enter your Roll Number."); return; }
-  if (ageVal.length === 0)    { alert("Please enter your Age.");         return; }
-  if (mobileVal.length !== 10){ alert("Mobile must be exactly 10 digits."); return; }
+  if (nameVal.length === 0)    { alert("Please enter your Full Name.");   return; }
+  if (rollVal.length === 0)    { alert("Please enter your Roll Number."); return; }
+  if (ageVal.length === 0)     { alert("Please enter your Age.");         return; }
+  if (mobileVal.length !== 10) { alert("Mobile must be exactly 10 digits."); return; }
 
-  // Password rules validation
   for (var i = 0; i < rules.length; i++) {
     if (!rules[i].check(pwdVal)) { alert("Password rule not satisfied."); return; }
   }
 
-  // Save to localStorage and show success
   var record = { name: nameVal, rollno: rollVal, age: ageVal,
                  mobile: mobileVal, savedAt: new Date().toLocaleString() };
   localStorage.setItem("studentRecord", JSON.stringify(record));
@@ -275,7 +263,6 @@ function handleSubmit() {
   msgEl.style.display = "block";
 }
 
-// Load previously saved record on page open
 window.onload = function () {
   var saved = localStorage.getItem("studentRecord");
   if (saved !== null) {
@@ -301,7 +288,6 @@ window.onload = function () {
 
 > **Screenshot:**
 > <img width="1906" height="1025" alt="image" src="https://github.com/user-attachments/assets/4fa5fb71-44d7-4194-844f-ba8f092ce422" />
-
 
 ---
 

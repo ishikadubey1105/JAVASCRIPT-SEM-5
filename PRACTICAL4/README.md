@@ -2,7 +2,7 @@
 
 **Student Name:** Ishika Dubey
 **PRN:** 24070521023
-**File Path:** `Task4/Task4.a/index.html` | `Task4/Task4.a/script.js` | `Task4/Task 4.b/index.html` | `Task4/Task 4.b/script.js`
+**File Path:** `PRACTICAL4/Task4.a/index.html` | `PRACTICAL4/Task4.a/script.js` | `PRACTICAL4/Task 4.b/index.html` | `PRACTICAL4/Task 4.b/script.js`
 
 ---
 
@@ -50,45 +50,39 @@ Use Function Types, Scope and Closures; Apply Try-Catch; Build a Palindrome Chec
 
 #### `Task4.a/script.js`
 ```js
-// 1. Function Declaration — traditional function
 function isPalindrome(word) {
   var reversed = word.split("").reverse().join("");
   return word === reversed;
 }
 
-// 2. Function Expression — assigned to a variable
 var cleanWord = function (word) {
   return word.toLowerCase().replace(/[^a-z0-9]/g, "");
 };
 
-// 3. Arrow Function (ES6)
 var showResult = (message) => {
   document.getElementById("error").innerText  = "";
   document.getElementById("result").innerText = message;
 };
 
-// 4. Closure — makeCounter() returns an inner function
-//    that remembers 'count' from its outer scope
 function makeCounter() {
-  var count = 0;          // outer scope variable
-  return function () {    // inner function — closure
+  var count = 0;
+  return function () {
     count++;
     return count;
   };
 }
-var counter = makeCounter();   // counter is now a closure
+var counter = makeCounter();
 
-// Main check function — uses Try-Catch for error handling
 function checkPalindrome() {
   try {
     var input = document.getElementById("wordInput").value;
 
     if (input.trim() === "") {
-      throw new Error("Please enter a word!");   // manually throwing error
+      throw new Error("Please enter a word!");
     }
 
-    var cleaned = cleanWord(input);     // Function Expression
-    var result  = isPalindrome(cleaned); // Function Declaration
+    var cleaned = cleanWord(input);
+    var result  = isPalindrome(cleaned);
 
     if (result) {
       showResult('"' + input + '" is a Palindrome! ✅');
@@ -97,7 +91,7 @@ function checkPalindrome() {
     }
 
   } catch (error) {
-    alert(error.message);   // Catch block handles thrown error
+    alert(error.message);
   }
 }
 ```
@@ -113,7 +107,6 @@ function checkPalindrome() {
 
 > **Screenshot:**
 > <img width="1917" height="1015" alt="image" src="https://github.com/user-attachments/assets/539e7206-cd4f-48f1-9bb3-605bac68d2dc" />
-
 
 ---
 
@@ -170,29 +163,24 @@ Vehicle Registration Number Validation Webpage using Functions, Scope, and Try-C
 
 #### `Task 4.b/script.js`
 ```js
-// Function Declaration — character type helpers (Global Scope)
 function isUpperLetter(ch) { return ch >= 'A' && ch <= 'Z'; }
 function isDigit(ch)       { return ch >= '0' && ch <= '9'; }
 
-// Function Declaration — main validator with Try-Catch
 function validateRegistration() {
   const input = document.getElementById("regInput");
   const registrationNumber = input.value.trim();
 
-  // Reset rule styles
   for (let i = 1; i <= 6; i++) {
     document.getElementById("rule" + i).classList.remove("pass", "fail");
   }
 
   try {
-    // Rule 1: Not empty
     if (registrationNumber.length === 0) {
       setRule(1, false);
       throw new Error("Registration number cannot be empty.");
     }
     setRule(1, true);
 
-    // Rule 2: Exactly 10 characters
     if (registrationNumber.length !== 10) {
       setRule(2, false);
       throw new Error("Length must be exactly 10 characters. You entered "
@@ -200,28 +188,24 @@ function validateRegistration() {
     }
     setRule(2, true);
 
-    // Rule 3: Chars [1-2] — State code — uppercase letters
     if (!isUpperLetter(registrationNumber[0]) || !isUpperLetter(registrationNumber[1])) {
       setRule(3, false);
       throw new Error("First 2 characters (State Code) must be uppercase letters.");
     }
     setRule(3, true);
 
-    // Rule 4: Chars [3-4] — District code — digits
     if (!isDigit(registrationNumber[2]) || !isDigit(registrationNumber[3])) {
       setRule(4, false);
       throw new Error("Characters 3-4 (District Code) must be digits.");
     }
     setRule(4, true);
 
-    // Rule 5: Chars [5-6] — Series — uppercase letters
     if (!isUpperLetter(registrationNumber[4]) || !isUpperLetter(registrationNumber[5])) {
       setRule(5, false);
       throw new Error("Characters 5-6 (Series) must be uppercase letters.");
     }
     setRule(5, true);
 
-    // Rule 6: Chars [7-10] — Vehicle number — digits
     if (!isDigit(registrationNumber[6]) || !isDigit(registrationNumber[7]) ||
         !isDigit(registrationNumber[8]) || !isDigit(registrationNumber[9])) {
       setRule(6, false);
@@ -232,20 +216,18 @@ function validateRegistration() {
     showResult("valid", "Valid Registration!");
 
   } catch (err) {
-    showResult("invalid", err.message);   // Catch block
+    showResult("invalid", err.message);
   }
 }
 
-// Function Declaration — sets rule pass/fail CSS class
 function setRule(ruleNum, passed) {
   document.getElementById("rule" + ruleNum).classList.add(passed ? "pass" : "fail");
 }
 
-// Function Declaration — updates the validate button UI
 function showResult(type, title) {
   const btn = document.getElementById("validateBtn");
   btn.classList.remove("result-valid", "result-invalid");
-  void btn.offsetWidth;  // force reflow for animation reset
+  void btn.offsetWidth;
 
   if (type === "valid") {
     btn.textContent = "✓  Valid Registration!";
@@ -256,7 +238,6 @@ function showResult(type, title) {
   }
 }
 
-// Event Listener — live character counter and auto-uppercase (Block Scope: let/const)
 document.getElementById("regInput").addEventListener("input", function () {
   document.getElementById("charCount").textContent = this.value.length + "/10";
   const btn = document.getElementById("validateBtn");
@@ -265,10 +246,9 @@ document.getElementById("regInput").addEventListener("input", function () {
   for (let i = 1; i <= 6; i++) {
     document.getElementById("rule" + i).classList.remove("pass", "fail");
   }
-  this.value = this.value.toUpperCase();  // Block-scoped `this`
+  this.value = this.value.toUpperCase();
 });
 
-// Enter key support
 document.getElementById("regInput").addEventListener("keydown", function (e) {
   if (e.key === "Enter") validateRegistration();
 });
@@ -287,7 +267,6 @@ document.getElementById("regInput").addEventListener("keydown", function (e) {
 
 > **Screenshot:**
 > <img width="1917" height="1013" alt="image" src="https://github.com/user-attachments/assets/26eb110b-699b-44da-b154-3cd3cc12a759" />
-
 
 ---
 
