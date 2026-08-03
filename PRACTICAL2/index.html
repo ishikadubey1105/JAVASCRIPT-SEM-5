@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ShopZone - Online Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <h2>&#128722; ShopZone</h2>
+    <p>Made by Ishika Dubey | 24070521023</p>
+  </div>
+
+  <!-- HEADING -->
+  <h2 class="page-heading">Our Products</h2>
+
+  <!-- PRODUCTS TABLE -->
+  <div class="product-list">
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-icon">&#128187;</div>
+      <div class="product-info">
+        <p class="product-name">Laptop</p>
+        <p class="product-desc">Intel i5, 8GB RAM, 256GB SSD</p>
+        <p class="product-price">Rs. 45,999</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty1" value="0" min="0" max="10">
+        <input type="hidden" id="price1" value="45999">
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-icon">&#127911;</div>
+      <div class="product-info">
+        <p class="product-name">Wireless Earbuds</p>
+        <p class="product-desc">Bluetooth 5.0, 24hr battery</p>
+        <p class="product-price">Rs. 1,999</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty2" value="0" min="0" max="10">
+        <input type="hidden" id="price2" value="1999">
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-icon">&#128241;</div>
+      <div class="product-info">
+        <p class="product-name">Smartphone</p>
+        <p class="product-desc">6.5 inch screen, 64MP camera</p>
+        <p class="product-price">Rs. 15,999</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty3" value="0" min="0" max="10">
+        <input type="hidden" id="price3" value="15999">
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <div class="product-icon">&#128085;</div>
+      <div class="product-info">
+        <p class="product-name">Casual T-Shirt</p>
+        <p class="product-desc">100% cotton, round neck</p>
+        <p class="product-price">Rs. 399</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty4" value="0" min="0" max="10">
+        <input type="hidden" id="price4" value="399">
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product-card">
+      <div class="product-icon">&#128086;</div>
+      <div class="product-info">
+        <p class="product-name">Denim Jeans</p>
+        <p class="product-desc">Slim fit, stretchable fabric</p>
+        <p class="product-price">Rs. 899</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty5" value="0" min="0" max="10">
+        <input type="hidden" id="price5" value="899">
+      </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product-card">
+      <div class="product-icon">&#128095;</div>
+      <div class="product-info">
+        <p class="product-name">Running Shoes</p>
+        <p class="product-desc">Lightweight, anti-slip sole</p>
+        <p class="product-price">Rs. 2,499</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty6" value="0" min="0" max="10">
+        <input type="hidden" id="price6" value="2499">
+      </div>
+    </div>
+
+    <!-- Product 7 -->
+    <div class="product-card">
+      <div class="product-icon">&#9749;</div>
+      <div class="product-info">
+        <p class="product-name">Coffee Maker</p>
+        <p class="product-desc">12-cup, keep-warm function</p>
+        <p class="product-price">Rs. 3,299</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty7" value="0" min="0" max="10">
+        <input type="hidden" id="price7" value="3299">
+      </div>
+    </div>
+
+    <!-- Product 8 -->
+    <div class="product-card">
+      <div class="product-icon">&#128218;</div>
+      <div class="product-info">
+        <p class="product-name">Python Book</p>
+        <p class="product-desc">Beginner to Advanced, 500+ pages</p>
+        <p class="product-price">Rs. 499</p>
+      </div>
+      <div class="product-qty">
+        <label>Quantity:</label>
+        <input type="number" id="qty8" value="0" min="0" max="10">
+        <input type="hidden" id="price8" value="499">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CUSTOMER DETAILS -->
+  <div class="customer-section">
+    <h3>Enter Your Details</h3>
+    <label>Name:</label>
+    <input type="text" id="cust-name" placeholder="Enter your name"><br><br>
+    <label>Phone:</label>
+    <input type="text" id="cust-phone" placeholder="Enter phone number"><br><br>
+    <label>Address:</label>
+    <input type="text" id="cust-addr" placeholder="Enter delivery address"><br><br>
+    <button onclick="calculateBill()">Generate Bill</button>
+    <button onclick="clearAll()" class="btn-clear">Clear</button>
+  </div>
+
+  <!-- BILL OUTPUT -->
+  <div class="bill-section" id="bill-section">
+    <!-- Bill appears here after clicking Generate Bill -->
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>&copy; 2026 ShopZone | Made by Ishika Dubey (24070521023)</p>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
