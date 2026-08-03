@@ -97,7 +97,9 @@ function calculateGrade() {
 - Output displays: Name, Marks, Grade (A+ / A / B / C / D / F), and Result (Pass / Fail).
 - Validation alerts fire if Name is empty, Marks field is empty, or value is out of range.
 
-> **Screenshot:** See `image.png` in `Task 3.a/` folder.
+> **Screenshot:**
+> <img width="1917" height="1023" alt="image" src="https://github.com/user-attachments/assets/c3066b89-182e-43a4-9c9e-4e9ada550d91" />
+
 
 ---
 
@@ -297,7 +299,9 @@ window.onload = function () {
   - On success: Registration Successful message displayed and record saved to `localStorage`.
   - On revisit: Previously saved record is auto-loaded.
 
-> **Screenshot:** See `image.png` in `Task 3.b/` folder.
+> **Screenshot:**
+> <img width="1906" height="1025" alt="image" src="https://github.com/user-attachments/assets/4fa5fb71-44d7-4194-844f-ba8f092ce422" />
+
 
 ---
 
