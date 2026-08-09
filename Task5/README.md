@@ -2,12 +2,13 @@
 
 **Student Name:** Ishika Dubey
 **PRN:** 24070521023
-**File Path:** `Task5/5.1/index.html`
 
 ---
 
 ## Experiment Title
-Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart Calculator
+Apply Array Methods and Object Handling in JavaScript
+
+---
 
 ## Software / Tools Required
 1. Visual Studio Code
@@ -17,11 +18,17 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
 
 ---
 
-## Experiment Program Code
+## Task 5.1 — Shopping Cart Calculator
 
-### Task 5.1 — Shopping Cart Calculator
+### Aim
+Demonstrate JavaScript array methods — `forEach`, `map`, `filter`, `reduce` — using a Shopping Cart Calculator with product objects.
 
-#### `5.1/index.html` (includes inline CSS and embedded JavaScript)
+### File Path
+`Task5/5.1/index.html`
+
+### Program Code
+
+#### `5.1/index.html`
 ```html
 <!DOCTYPE html>
 <html>
@@ -66,7 +73,7 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
   </div>
 
   <script>
-    let cart = [];   // let — block-scoped array
+    let cart = [];
 
     function addProduct() {
       let name  = document.getElementById("name").value;
@@ -78,12 +85,10 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
         return;
       }
 
-      // Create product object and push to cart array
       let product = { id: cart.length + 1, name: name, price: price, quantity: qty };
       cart.push(product);
       displayCart();
 
-      // Clear inputs
       document.getElementById("name").value  = "";
       document.getElementById("price").value = "";
       document.getElementById("qty").value   = "";
@@ -97,7 +102,7 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
           <th>Quantity</th><th>Total</th>
         </tr>`;
 
-      // forEach — iterate and append each row to table
+      // forEach — renders each cart item row
       cart.forEach(function (item) {
         table.innerHTML += `
           <tr>
@@ -109,12 +114,11 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
           </tr>`;
       });
 
-      // reduce — calculate grand total from all cart items
+      // reduce — calculates grand total
       let total = cart.reduce(function (sum, item) {
         return sum + (item.price * item.quantity);
       }, 0);
 
-      // Discount logic using if-else-if
       let discount = 0;
       if      (total >= 50000) discount = total * 0.20;
       else if (total >= 20000) discount = total * 0.10;
@@ -122,20 +126,19 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
 
       let finalAmount = total - discount;
 
-      // Template literals for result display
       document.getElementById("result").innerHTML = `
         <b>Total Amount :</b> ${total}<br>
         <b>Discount :</b> ${discount.toFixed(2)}<br>
         <b>Final Amount :</b> ${finalAmount.toFixed(2)}`;
 
-      // map — build summary list (name : itemTotal)
+      // map — builds item summary list
       let summary = document.getElementById("summary");
       summary.innerHTML = "";
       cart.map(function (item) {
         summary.innerHTML += `<li>${item.name} : ${item.price * item.quantity}</li>`;
       });
 
-      // filter — find products with price > 1000
+      // filter — finds products with price > 1000
       let expensive = document.getElementById("expensive");
       expensive.innerHTML = "";
       let exp = cart.filter(function (item) {
@@ -150,46 +153,183 @@ Demonstrate Array Methods (forEach, map, filter, reduce) using a Shopping Cart C
 </html>
 ```
 
----
+### Array Methods Used
 
-## Output
-- User inputs Product Name, Price, and Quantity, then clicks **Add Product**.
-- Each product is appended to the cart table showing ID, Name, Price, Qty, and Total.
-- After adding products:
-  - **Total Amount** = sum of all `price × quantity` (using `reduce`)
-  - **Discount** applied based on total:
-    - ≥ ₹50,000 → 20% off
-    - ≥ ₹20,000 → 10% off
-    - ≥ ₹5,000  → 5% off
-  - **Final Amount** = Total − Discount
-  - **Item Summary** list is generated using `map` (name : item total)
-  - **Expensive Products** (price > ₹1000) listed using `filter`
+| Method     | Purpose                                                    |
+|------------|------------------------------------------------------------|
+| `forEach`  | Renders each cart item as a table row                      |
+| `map`      | Builds Item Summary list with `name : itemTotal`           |
+| `filter`   | Extracts products where `price > 1000`                     |
+| `reduce`   | Calculates grand total: `sum + (price × quantity)`         |
+
+### Output
+- User enters Product Name, Price, and Quantity → clicks **Add Product**
+- Table shows ID, Name, Price, Qty, Total for each product
+- Discount applied automatically:
+  - ≥ ₹50,000 → 20% off
+  - ≥ ₹20,000 → 10% off
+  - ≥ ₹5,000  → 5% off
+- Final Amount = Total − Discount
+- Item Summary and Expensive Products lists update on every add
+
+### Screenshot
 
 > **Screenshot:**
-> <img width="1907" height="1022" alt="Screenshot 2026-08-03 214823" src="https://github.com/user-attachments/assets/e13713a2-5be3-4044-b673-14c43a352af2" />
-
+> <img width="1917" height="1015" alt="image" src="paste-your-github-image-url-here" />
 
 ---
 
-## Case Study Title
-Shopping Cart Calculator using Array Methods — forEach, map, filter, reduce
+## Task 5.2 — Max & Min Finder (Array of Objects)
 
-## Case Study Program Code
-> See the embedded `<script>` block inside `index.html` above.
+### Aim
+Create an array of objects from user input and find the Maximum and Minimum values using array methods — `map()`, `Math.max()`, `Math.min()`, `some()`.
 
-| Array Method | Usage in Code |
-|-------------|--------------|
-| `forEach`   | Renders each cart item row in the table; lists expensive products |
-| `map`       | Builds Item Summary list with `name : itemTotal` per product |
-| `filter`    | Extracts products where `price > 1000` |
-| `reduce`    | Calculates the grand total: `sum + (price × quantity)` |
+### File Path
+`Task5/5.2/index.html` + `Task5/5.2/script.js`
 
-## Output
-- Cart dynamically updates as products are added.
-- Discount is automatically computed and displayed.
-- Summary and expensive product lists update on every add.
+### Program Code
+
+#### `5.2/index.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task 5.2 – Max & Min</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2   { margin-bottom: 20px; color: #333; }
+    input {
+      width: 100%; padding: 10px; font-size: 16px;
+      border: 1px solid #ccc; border-radius: 6px;
+      margin-bottom: 10px; box-sizing: border-box;
+    }
+    button {
+      width: 100%; padding: 10px; background: #4f46e5;
+      color: white; font-size: 16px;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    button:hover { background: #4338ca; }
+    .result { margin-top: 20px; display: none; }
+    .result p { font-size: 16px; margin: 8px 0; color: #333; }
+    .result span { font-weight: bold; color: #4f46e5; }
+    .error { color: red; font-size: 14px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Task 5.2 – Max &amp; Min Finder</h2>
+
+    <label>Enter numbers separated by commas:</label>
+    <input type="text" id="inputNumbers" placeholder="e.g. 10, 25, 3, 47, 8" />
+    <div class="error" id="errorMsg"></div>
+
+    <button onclick="findMaxMin()">Find Max &amp; Min</button>
+
+    <div class="result" id="result">
+      <p>Numbers Array: <span id="arrDisplay"></span></p>
+      <p>Maximum Value: <span id="maxVal"></span></p>
+      <p>Minimum Value: <span id="minVal"></span></p>
+    </div>
+
+    <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;" />
+    <p style="margin-top: 12px; font-size: 14px; color: #555;">
+      <strong>Name:</strong> Ishika Dubey &nbsp;|&nbsp; <strong>PRN:</strong> 24070521023
+    </p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+#### `5.2/script.js`
+```js
+// Task 5.2 – Find Max & Min from Array of Objects (user input)
+
+function findMaxMin() {
+  const input      = document.getElementById("inputNumbers").value.trim();
+  const errorMsg   = document.getElementById("errorMsg");
+  const resultDiv  = document.getElementById("result");
+
+  errorMsg.textContent   = "";
+  resultDiv.style.display = "none";
+
+  if (input === "") {
+    errorMsg.textContent = "Please enter at least one number.";
+    return;
+  }
+
+  // Convert input string → array of objects using map()
+  const rawValues   = input.split(",");
+  const numbersArray = rawValues.map((item, index) => ({
+    id: index + 1,
+    value: Number(item.trim())
+  }));
+
+  // Validate using some()
+  const hasInvalid = numbersArray.some(obj => isNaN(obj.value));
+  if (hasInvalid) {
+    errorMsg.textContent = "Invalid input! Please enter numbers only, separated by commas.";
+    return;
+  }
+
+  // Extract numeric values using map()
+  const values = numbersArray.map(obj => obj.value);
+
+  // Find max and min using Math methods + spread operator
+  const maxVal = Math.max(...values);
+  const minVal = Math.min(...values);
+
+  // Display results
+  document.getElementById("arrDisplay").textContent = "[" + values.join(", ") + "]";
+  document.getElementById("maxVal").textContent     = maxVal;
+  document.getElementById("minVal").textContent     = minVal;
+  resultDiv.style.display = "block";
+}
+```
+
+### Array Methods Used
+
+| Method        | Purpose                                              |
+|---------------|------------------------------------------------------|
+| `map()`       | Converts input strings into array of number objects  |
+| `map()`       | Extracts `value` from each object into a plain array |
+| `some()`      | Validates that no entry is `NaN`                     |
+| `Math.max()`  | Finds the largest number using spread operator       |
+| `Math.min()`  | Finds the smallest number using spread operator      |
+
+### Output
+- User types comma-separated numbers (e.g. `10, 25, 3, 47, 8`)
+- Clicking **Find Max & Min** shows:
+  - Numbers Array: `[10, 25, 3, 47, 8]`
+  - Maximum Value: **47**
+  - Minimum Value: **3**
+- Invalid input shows an error message in red
+
+### Screenshot
+
+> **Screenshot:**
+> <img width="1917" height="1015" alt="image" src="paste-your-github-image-url-here" />
 
 ---
 
 ## Result / Conclusion
-The practical was completed successfully. JavaScript array methods — `forEach`, `map`, `filter`, and `reduce` — were demonstrated through a functional Shopping Cart Calculator. Products are added dynamically, totals are computed using `reduce`, item summaries are generated using `map`, and products above ₹1000 are identified using `filter`. A discount system was also implemented using conditional statements.
+
+Both tasks were completed successfully:
+
+- **Task 5.1** demonstrated `forEach`, `map`, `filter`, and `reduce` through a Shopping Cart Calculator that dynamically adds products, computes totals, applies discounts, and lists expensive items.
+- **Task 5.2** demonstrated `map()`, `some()`, `Math.max()`, and `Math.min()` by converting user-entered comma-separated numbers into an array of objects and finding the maximum and minimum values.
