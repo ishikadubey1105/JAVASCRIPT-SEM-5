@@ -323,7 +323,11 @@ function findMaxMin() {
 ### Screenshot
 
 > **Screenshot:**
-> <img width="1917" height="1015" alt="image" src="paste-your-github-image-url-here" />
+> <img width="1919" height="1022" alt="image" src="https://github.com/user-attachments/assets/bcdca0e0-3fb7-4427-a1d6-5c0c576a92c3" />
+
+> <img width="1907" height="1022" alt="image" src="https://github.com/user-attachments/assets/ea519977-a372-4b27-9151-8cdcf13d0747" />
+
+
 
 ---
 
