@@ -172,12 +172,6 @@ Demonstrate JavaScript array methods — `forEach`, `map`, `filter`, `reduce` �
 - Final Amount = Total − Discount
 - Item Summary and Expensive Products lists update on every add
 
-### Screenshot
-
-> **Screenshot:**
-> <img width="1917" height="1015" alt="image" src="paste-your-github-image-url-here" />
-
----
 
 ## Task 5.2 — Max & Min Finder (Array of Objects)
 
