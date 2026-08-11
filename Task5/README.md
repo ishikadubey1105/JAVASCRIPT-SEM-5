@@ -317,7 +317,8 @@ function findMaxMin() {
 ### Screenshot
 
 > **Screenshot:**
-> <img width="1919" height="1022" alt="image" src="https://github.com/user-attachments/assets/bcdca0e0-3fb7-4427-a1d6-5c0c576a92c3" />
+> <img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/53f8082b-f7a9-4f3c-a784-214289b48eab" />
+
 
 > <img width="1907" height="1022" alt="image" src="https://github.com/user-attachments/assets/ea519977-a372-4b27-9151-8cdcf13d0747" />
 
