@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Task 5.2 - Student Marks Analyser</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e3a5f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 500px;
+      padding: 24px 28px;
+    }
+
+    h2 {
+      color: #1e3a5f;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 16px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .input-row input {
+      flex: 1;
+      padding: 9px 10px;
+      font-size: 13px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .input-row input:focus {
+      outline: none;
+      border-color: #1e3a5f;
+    }
+
+    .btn-add {
+      padding: 9px 14px;
+      background: #1e3a5f;
+      color: white;
+      font-size: 13px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover { background: #16304f; }
+
+    .error {
+      color: #c0392b;
+      font-size: 12px;
+      min-height: 16px;
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    table th {
+      background: #1e3a5f;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    table td {
+      padding: 7px 10px;
+      font-size: 13px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+    }
+
+    table tr:nth-child(even) td { background: #f5f8ff; }
+
+    .btn-find {
+      width: 100%;
+      padding: 9px;
+      background: #2e7d32;
+      color: white;
+      font-size: 13px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .btn-find:hover { background: #245c27; }
+
+    .result-cards {
+      display: none;
+      flex-direction: row;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card.max { background: #e8f5e9; border: 1px solid #2e7d32; }
+    .card.min { background: #fdecea; border: 1px solid #c62828; }
+
+    .card .label {
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .card.max .label { color: #2e7d32; }
+    .card.min .label { color: #c62828; }
+
+    .card .student-name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 2px;
+    }
+
+    .card .student-marks {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .card.max .student-marks { color: #2e7d32; }
+    .card.min .student-marks { color: #c62828; }
+
+    .btn-reset {
+      width: 100%;
+      padding: 8px;
+      background: transparent;
+      color: #999;
+      font-size: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 14px;
+    }
+
+    .btn-reset:hover { background: #f9f9f9; color: #555; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h2>Student Marks Analyser</h2>
+    <p class="subtitle">Task 5.2 — Find Highest and Lowest Scorer using Array of Objects</p>
+
+    <div class="input-row">
+      <input type="text"   id="studentName"  placeholder="Student Name" />
+      <input type="number" id="studentMarks" placeholder="Marks (0-100)" min="0" max="100" />
+      <button class="btn-add" onclick="addStudent()">Add</button>
+    </div>
+    <div class="error" id="errorMsg"></div>
+
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student Name</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <button class="btn-find" id="findBtn" onclick="findMaxMin()">
+      Find Highest and Lowest Scorer
+    </button>
+
+    <div class="result-cards" id="resultCards">
+      <div class="card max">
+        <div class="label">Highest Scorer</div>
+        <div class="student-name" id="maxName">-</div>
+        <div class="student-marks" id="maxMarks">-</div>
+      </div>
+      <div class="card min">
+        <div class="label">Lowest Scorer</div>
+        <div class="student-name" id="minName">-</div>
+        <div class="student-marks" id="minMarks">-</div>
+      </div>
+    </div>
+
+    <button class="btn-reset" onclick="resetAll()">Reset</button>
+
+    <hr />
+    <p class="footer">
+      <strong>Name:</strong> Ishika Dubey &nbsp;|&nbsp; <strong>PRN:</strong> 24070521023
+    </p>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
