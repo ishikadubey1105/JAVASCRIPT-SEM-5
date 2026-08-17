@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reverse String & Count Vowels</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 40px;
+            background-color: #fef6fb;
+            color: #4a4a4a;
+        }
+
+        h1 {
+            text-align: center;
+            color: #b56db5;
+        }
+
+        .box {
+            border: 1px solid #e8c8e8;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #fff5fa;
+        }
+
+        .box:nth-child(2) {
+            background-color: #f0f7ff;
+            border-color: #b8d4f0;
+        }
+
+        input,
+        textarea,
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 90%;
+            border: 1px solid #dcc8e8;
+            border-radius: 6px;
+            background-color: #ffffff;
+        }
+
+        textarea {
+            background-color: #fdfaff;
+        }
+
+        button {
+            width: 150px;
+            cursor: pointer;
+            background-color: #d4a5d4;
+            color: #fff;
+            border: none;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #c08ec0;
+        }
+
+        .box:nth-child(2) button {
+            background-color: #8bb8e0;
+        }
+
+        .box:nth-child(2) button:hover {
+            background-color: #6fa3d4;
+        }
+
+        #reverseOutput,
+        #vowelOutput {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fdf0f7;
+            border-radius: 6px;
+        }
+
+        .box:nth-child(2) #vowelOutput {
+            background-color: #eef4fb;
+        }
+
+        h3 {
+            color: #9b6b9b;
+        }
+
+        .box:nth-child(2) h3 {
+            color: #5a8ab5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Reverse String & Count Vowels</h1>
+
+    <p style="text-align: center; font-size: 16px;">
+        <b>Name:</b> Ishika Dubey &nbsp; | &nbsp; <b>PRN:</b> 24070521023
+    </p>
+
+    <!-- ── Section 1: Reverse a String ── -->
+
+    <div class="box">
+
+        <label><b>Enter a string to reverse:</b></label><br>
+
+        <input type="text" id="stringInput" placeholder="Enter a string">
+
+        <br>
+
+        <button onclick="reverseString()">Reverse</button>
+
+        <div id="reverseOutput"></div>
+
+    </div>
+
+    <!-- ── Section 2: Count Vowels in a Paragraph ── -->
+
+    <div class="box">
+
+        <label><b>Enter a paragraph to count vowels:</b></label><br>
+
+        <textarea id="paragraph"
+            rows="5">JavaScript is a powerful programming language. It is widely used for web development.</textarea>
+
+        <br>
+
+        <button onclick="countVowels()">Count Vowels</button>
+
+        <div id="vowelOutput"></div>
+
+    </div>
+
+    <script>
+
+        // ── Program 1: Reverse a String ──
+
+        function reverseString() {
+
+            let str = document.getElementById("stringInput").value;
+
+            // split the string into an array of characters,
+            // reverse the array, and join it back into a string
+            let reversed = str.split("").reverse().join("");
+
+            document.getElementById("reverseOutput").innerHTML = `
+
+                <h3>1. Original String</h3>
+                <p>${str}</p>
+
+                <h3>2. Reversed String</h3>
+                <p>${reversed}</p>
+
+            `;
+        }
+
+        // ── Program 2: Count Vowels in a Paragraph ──
+
+        function countVowels() {
+
+            let paragraph = document.getElementById("paragraph").value;
+
+            // match() - Find all vowels (case-insensitive)
+            let vowels = paragraph.match(/[aeiou]/gi);
+            let vowelCount = vowels ? vowels.length : 0;
+
+            // Count each vowel separately
+            let a = (paragraph.match(/a/gi) || []).length;
+            let e = (paragraph.match(/e/gi) || []).length;
+            let i = (paragraph.match(/i/gi) || []).length;
+            let o = (paragraph.match(/o/gi) || []).length;
+            let u = (paragraph.match(/u/gi) || []).length;
+
+            document.getElementById("vowelOutput").innerHTML = `
+
+                <h3>1. Original Paragraph</h3>
+                <p>${paragraph}</p>
+
+                <h3>2. Vowels Found</h3>
+                <p>${vowels ? vowels.join(", ") : "No vowels found"}</p>
+
+                <h3>3. Total Vowel Count</h3>
+                <p>Total number of vowels: <b>${vowelCount}</b></p>
+
+                <h3>4. Individual Vowel Count</h3>
+                <p>
+                    a = <b>${a}</b><br>
+                    e = <b>${e}</b><br>
+                    i = <b>${i}</b><br>
+                    o = <b>${o}</b><br>
+                    u = <b>${u}</b>
+                </p>
+
+            `;
+        }
+
+    </script>
+
+</body>
+
+</html>
