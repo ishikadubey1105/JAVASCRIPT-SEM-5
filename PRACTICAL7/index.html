@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information using Regular Expressions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: #fdf6f0;
+            color: #3d3229;
+            padding: 40px 20px;
+        }
+
+        .wrapper {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2c2418;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            color: #8a7968;
+            margin-top: 6px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 32px;
+            box-shadow: 0 4px 24px rgba(140, 110, 80, 0.08);
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #9a8672;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 170px;
+            padding: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3d3229;
+            background: #faf7f4;
+            border: 2px solid #ece3d9;
+            border-radius: 14px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #d4a574;
+            box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.15);
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #d4a574, #c4876e);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196, 135, 110, 0.35);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+
+
+        #result {
+            display: none;
+        }
+
+        #result.show {
+            display: block;
+            animation: fadeUp 0.5s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2c2418;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .info-item {
+            background: #faf7f4;
+            border-radius: 14px;
+            padding: 16px 18px;
+            transition: transform 0.15s;
+        }
+
+        .info-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .info-item .info-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #a0917f;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-item .info-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #3d3229;
+            word-break: break-word;
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px dashed #e4dbd0;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .badge.valid {
+            background: #e6f7ee;
+            color: #1d8348;
+        }
+
+        .badge.invalid {
+            background: #fdeaea;
+            color: #c0392b;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 14px;
+            margin-top: 4px;
+        }
+
+        .stat-box {
+            flex: 1;
+            text-align: center;
+            background: linear-gradient(135deg, #fff5eb, #fef0e3);
+            border-radius: 14px;
+            padding: 18px 12px;
+        }
+
+        .stat-box .stat-number {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #c4876e;
+        }
+
+        .stat-box .stat-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #a0917f;
+            margin-top: 4px;
+        }
+
+        .text-block {
+            background: #faf7f4;
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #5c4d3c;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 540px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="header">
+
+            <h1>Student Information Extraction</h1>
+            <p>Paste student details below and let regex do the magic</p>
+        </div>
+
+        <div class="card">
+            <label for="inputText">Student Data</label>
+            <textarea id="inputText">Student Name: Ishika Dubey
+Roll Number: 23
+Email Address: ishika.dubey@gmail.com
+Phone Number: 9876543210
+Department: Computer Science</textarea>
+
+            <button class="btn" onclick="processText()">Process Information</button>
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+
+        function processText() {
+
+            let text = document.getElementById("inputText").value;
+
+            let studentName = text.match(/Student Name:\s*([A-Za-z ]+)/i);
+            let rollNumber = text.match(/Roll Number:\s*(\d+)/i);
+            let email = text.match(/Email Address:\s*([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/i);
+            let phone = text.match(/Phone Number:\s*(\d+)/i);
+            let department = text.match(/Department:\s*(.+)/i);
+
+            studentName = studentName ? studentName[1].trim() : "Not Found";
+            rollNumber = rollNumber ? rollNumber[1].trim() : "Not Found";
+            email = email ? email[1].trim() : "Not Found";
+            phone = phone ? phone[1].trim() : "Not Found";
+            department = department ? department[1].trim() : "Not Found";
+
+            let emailRegex =
+                /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            let emailValid = emailRegex.test(email);
+
+            let emailStatus = emailValid
+                ? '<span class="badge valid">Valid</span>'
+                : '<span class="badge invalid">Invalid</span>';
+
+            let phoneRegex = /^\d{10}$/;
+
+            let phoneValid = phoneRegex.test(phone);
+
+            let phoneStatus = phoneValid
+                ? '<span class="badge valid">Valid — 10 digits</span>'
+                : '<span class="badge invalid">Invalid — Must be 10 digits</span>';
+
+            let words = text.trim().match(/\S+/g);
+
+            let totalWords = words ? words.length : 0;
+
+            let totalCharacters = text.replace(/\s/g, "").length;
+
+            let lowerText = text.toLowerCase();
+
+            let replacedText =
+                text.replace(/Computer Science/gi, "Information Technology");
+
+            let resultEl = document.getElementById("result");
+
+            resultEl.innerHTML = `
+
+        <div class="card">
+            <div class="result-section-title">Extracted Profile</div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">${studentName}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Roll No.</div>
+                    <div class="info-value">${rollNumber}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">${email}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value">${phone}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Department</div>
+                    <div class="info-value">${department}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email Check</div>
+                    <div class="info-value">${emailStatus}</div>
+                </div>
+                <div class="info-item full-width">
+                    <div class="info-label">Phone Check</div>
+                    <div class="info-value">${phoneStatus}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="result-section-title">Text Analysis</div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-number">${totalWords}</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${totalCharacters}</div>
+                    <div class="stat-label">Characters</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="result-section-title">Lowercase Version</div>
+            <div class="text-block">${lowerText}</div>
+        </div>
+
+        <div class="card">
+            <div class="result-section-title">After Department Replacement</div>
+            <div class="text-block">${replacedText}</div>
+        </div>
+
+    `;
+
+            resultEl.className = '';
+            void resultEl.offsetWidth;
+            resultEl.classList.add('show');
+        }
+
+    </script>
+
+</body>
+
+</html>

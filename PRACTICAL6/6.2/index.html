@@ -152,17 +152,14 @@
             `;
         }
 
-        // ── Program 2: Count Vowels in a Paragraph ──
 
         function countVowels() {
 
             let paragraph = document.getElementById("paragraph").value;
 
-            // match() - Find all vowels (case-insensitive)
             let vowels = paragraph.match(/[aeiou]/gi);
             let vowelCount = vowels ? vowels.length : 0;
 
-            // Count each vowel separately
             let a = (paragraph.match(/a/gi) || []).length;
             let e = (paragraph.match(/e/gi) || []).length;
             let i = (paragraph.match(/i/gi) || []).length;

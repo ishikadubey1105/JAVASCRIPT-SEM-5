@@ -172,11 +172,17 @@ Demonstrate JavaScript array methods — `forEach`, `map`, `filter`, `reduce` �
 - Final Amount = Total − Discount
 - Item Summary and Expensive Products lists update on every add
 
+### Screenshot
 
-## Task 5.2 — Student Marks Analyser (Max & Min from Array of Objects)
+> **Screenshot:**
+> ![alt text](image-2.png)
+
+---
+
+## Task 5.2 — Max & Min Finder (Array of Objects)
 
 ### Aim
-Build a Student Marks Analyser application that stores student data as an array of objects and finds the Highest and Lowest Scorer using array methods — `map()`, `Math.max()`, `Math.min()`, `some()`, `find()`.
+Create an array of objects from user input and find the Maximum and Minimum values using array methods — `map()`, `Math.max()`, `Math.min()`, `some()`.
 
 ### File Path
 `Task5/5.2/index.html` + `Task5/5.2/script.js`
@@ -187,314 +193,137 @@ Build a Student Marks Analyser application that stores student data as an array 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <title>Task 5.2 - Student Marks Analyser</title>
+  <title>Task 5.2 – Max & Min</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background: #1e3a5f;
+      background: #f0f4f8;
       display: flex;
       justify-content: center;
-      align-items: center;
+      padding: 40px;
     }
-
-    .container {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      width: 500px;
-      padding: 24px 28px;
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 400px;
     }
-
-    h2 { color: #1e3a5f; font-size: 20px; margin-bottom: 4px; }
-
-    .subtitle { font-size: 12px; color: #777; margin-bottom: 16px; }
-
-    .input-row { display: flex; gap: 8px; margin-bottom: 6px; }
-
-    .input-row input {
-      flex: 1; padding: 9px 10px; font-size: 13px;
+    h2   { margin-bottom: 20px; color: #333; }
+    input {
+      width: 100%; padding: 10px; font-size: 16px;
       border: 1px solid #ccc; border-radius: 6px;
+      margin-bottom: 10px; box-sizing: border-box;
     }
-
-    .input-row input:focus { outline: none; border-color: #1e3a5f; }
-
-    .btn-add {
-      padding: 9px 14px; background: #1e3a5f; color: white;
-      font-size: 13px; border: none; border-radius: 6px;
-      cursor: pointer; white-space: nowrap;
+    button {
+      width: 100%; padding: 10px; background: #4f46e5;
+      color: white; font-size: 16px;
+      border: none; border-radius: 6px; cursor: pointer;
     }
-
-    .btn-add:hover { background: #16304f; }
-
-    .error { color: #c0392b; font-size: 12px; min-height: 16px; margin-bottom: 6px; }
-
-    table { width: 100%; border-collapse: collapse; margin-bottom: 12px; display: none; }
-
-    table th {
-      background: #1e3a5f; color: white;
-      padding: 8px 10px; text-align: left; font-size: 13px;
-    }
-
-    table td { padding: 7px 10px; font-size: 13px; border-bottom: 1px solid #eee; color: #333; }
-
-    table tr:nth-child(even) td { background: #f5f8ff; }
-
-    .btn-find {
-      width: 100%; padding: 9px; background: #2e7d32; color: white;
-      font-size: 13px; border: none; border-radius: 6px;
-      cursor: pointer; margin-bottom: 12px; display: none;
-    }
-
-    .btn-find:hover { background: #245c27; }
-
-    .result-cards { display: none; flex-direction: row; gap: 10px; margin-bottom: 10px; }
-
-    .card { flex: 1; padding: 14px; border-radius: 8px; text-align: center; }
-
-    .card.max { background: #e8f5e9; border: 1px solid #2e7d32; }
-    .card.min { background: #fdecea; border: 1px solid #c62828; }
-
-    .card .label {
-      font-size: 11px; font-weight: bold;
-      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
-    }
-
-    .card.max .label { color: #2e7d32; }
-    .card.min .label { color: #c62828; }
-
-    .card .student-name { font-size: 15px; font-weight: bold; color: #222; margin-bottom: 2px; }
-
-    .card .student-marks { font-size: 22px; font-weight: bold; }
-
-    .card.max .student-marks { color: #2e7d32; }
-    .card.min .student-marks { color: #c62828; }
-
-    .btn-reset {
-      width: 100%; padding: 8px; background: transparent; color: #999;
-      font-size: 12px; border: 1px solid #ddd; border-radius: 6px;
-      cursor: pointer; margin-bottom: 14px;
-    }
-
-    .btn-reset:hover { background: #f9f9f9; color: #555; }
-
-    hr { border: none; border-top: 1px solid #eee; margin-bottom: 10px; }
-
-    .footer { font-size: 12px; color: #999; }
+    button:hover { background: #4338ca; }
+    .result { margin-top: 20px; display: none; }
+    .result p { font-size: 16px; margin: 8px 0; color: #333; }
+    .result span { font-weight: bold; color: #4f46e5; }
+    .error { color: red; font-size: 14px; margin-top: 8px; }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <div class="box">
+    <h2>Task 5.2 – Max &amp; Min Finder</h2>
 
-    <h2>Student Marks Analyser</h2>
-    <p class="subtitle">Task 5.2 — Find Highest and Lowest Scorer using Array of Objects</p>
-
-    <div class="input-row">
-      <input type="text"   id="studentName"  placeholder="Student Name" />
-      <input type="number" id="studentMarks" placeholder="Marks (0-100)" min="0" max="100" />
-      <button class="btn-add" onclick="addStudent()">Add</button>
-    </div>
+    <label>Enter numbers separated by commas:</label>
+    <input type="text" id="inputNumbers" placeholder="e.g. 10, 25, 3, 47, 8" />
     <div class="error" id="errorMsg"></div>
 
-    <table id="studentTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Student Name</th>
-          <th>Marks</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
+    <button onclick="findMaxMin()">Find Max &amp; Min</button>
 
-    <button class="btn-find" id="findBtn" onclick="findMaxMin()">
-      Find Highest and Lowest Scorer
-    </button>
-
-    <div class="result-cards" id="resultCards">
-      <div class="card max">
-        <div class="label">Highest Scorer</div>
-        <div class="student-name" id="maxName">-</div>
-        <div class="student-marks" id="maxMarks">-</div>
-      </div>
-      <div class="card min">
-        <div class="label">Lowest Scorer</div>
-        <div class="student-name" id="minName">-</div>
-        <div class="student-marks" id="minMarks">-</div>
-      </div>
+    <div class="result" id="result">
+      <p>Numbers Array: <span id="arrDisplay"></span></p>
+      <p>Maximum Value: <span id="maxVal"></span></p>
+      <p>Minimum Value: <span id="minVal"></span></p>
     </div>
 
-    <button class="btn-reset" onclick="resetAll()">Reset</button>
-
-    <hr />
-    <p class="footer">
+    <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;" />
+    <p style="margin-top: 12px; font-size: 14px; color: #555;">
       <strong>Name:</strong> Ishika Dubey &nbsp;|&nbsp; <strong>PRN:</strong> 24070521023
     </p>
-
   </div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
 ```
 
 #### `5.2/script.js`
 ```js
-// Task 5.2 – Find Max & Min from Array of Student Objects
-
-let students = [];
-
-function addStudent() {
-  const nameInput  = document.getElementById("studentName");
-  const marksInput = document.getElementById("studentMarks");
-  const errorMsg   = document.getElementById("errorMsg");
-
-  const name  = nameInput.value.trim();
-  const marks = Number(marksInput.value);
-
-  errorMsg.textContent = "";
-
-  if (name === "") {
-    errorMsg.textContent = "Please enter the student's name.";
-    return;
-  }
-
-  if (marksInput.value === "" || isNaN(marks) || marks < 0 || marks > 100) {
-    errorMsg.textContent = "Please enter valid marks between 0 and 100.";
-    return;
-  }
-
-  // Create a student object and push to array
-  const student = { id: students.length + 1, name: name, marks: marks };
-  students.push(student);
-
-  console.log("Students Array:", students);
-
-  renderTable();
-
-  nameInput.value  = "";
-  marksInput.value = "";
-  nameInput.focus();
-}
-
-function renderTable() {
-  const table     = document.getElementById("studentTable");
-  const tableBody = document.getElementById("tableBody");
-  const findBtn   = document.getElementById("findBtn");
-
-  // Use map() to build table rows from array of objects
-  tableBody.innerHTML = students.map(function(student) {
-    return `<tr>
-      <td>${student.id}</td>
-      <td>${student.name}</td>
-      <td>${student.marks}</td>
-    </tr>`;
-  }).join("");
-
-  if (students.length >= 2) {
-    table.style.display   = "table";
-    findBtn.style.display = "block";
-  } else if (students.length === 1) {
-    table.style.display   = "table";
-    findBtn.style.display = "none";
-  }
-
-  document.getElementById("resultCards").style.display = "none";
-}
+// Task 5.2 – Find Max & Min from Array of Objects (user input)
 
 function findMaxMin() {
-  // Use map() to extract marks from each student object
-  const allMarks = students.map(function(student) {
-    return student.marks;
-  });
+  const input      = document.getElementById("inputNumbers").value.trim();
+  const errorMsg   = document.getElementById("errorMsg");
+  const resultDiv  = document.getElementById("result");
 
-  console.log("All Marks extracted via map():", allMarks);
+  errorMsg.textContent   = "";
+  resultDiv.style.display = "none";
 
-  // Find max and min using Math methods + spread operator
-  const maxMarks = Math.max(...allMarks);
-  const minMarks = Math.min(...allMarks);
-
-  // Use some() to validate — safety check for NaN
-  const hasInvalid = students.some(function(student) {
-    return isNaN(student.marks);
-  });
-
-  if (hasInvalid) {
-    document.getElementById("errorMsg").textContent = "Invalid data found in student list.";
+  if (input === "") {
+    errorMsg.textContent = "Please enter at least one number.";
     return;
   }
 
-  // Use find() to get the actual student objects
-  const topStudent    = students.find(function(s) { return s.marks === maxMarks; });
-  const bottomStudent = students.find(function(s) { return s.marks === minMarks; });
+  // Convert input string → array of objects using map()
+  const rawValues   = input.split(",");
+  const numbersArray = rawValues.map((item, index) => ({
+    id: index + 1,
+    value: Number(item.trim())
+  }));
 
-  console.log("Highest Scorer:", topStudent);
-  console.log("Lowest Scorer:",  bottomStudent);
+  // Validate using some()
+  const hasInvalid = numbersArray.some(obj => isNaN(obj.value));
+  if (hasInvalid) {
+    errorMsg.textContent = "Invalid input! Please enter numbers only, separated by commas.";
+    return;
+  }
 
-  document.getElementById("maxName").textContent  = topStudent.name;
-  document.getElementById("maxMarks").textContent = maxMarks + " / 100";
-  document.getElementById("minName").textContent  = bottomStudent.name;
-  document.getElementById("minMarks").textContent = minMarks + " / 100";
+  // Extract numeric values using map()
+  const values = numbersArray.map(obj => obj.value);
 
-  document.getElementById("resultCards").style.display = "flex";
-}
+  // Find max and min using Math methods + spread operator
+  const maxVal = Math.max(...values);
+  const minVal = Math.min(...values);
 
-function resetAll() {
-  students = [];
-
-  document.getElementById("studentName").value    = "";
-  document.getElementById("studentMarks").value   = "";
-  document.getElementById("errorMsg").textContent = "";
-  document.getElementById("tableBody").innerHTML  = "";
-  document.getElementById("studentTable").style.display = "none";
-  document.getElementById("findBtn").style.display      = "none";
-  document.getElementById("resultCards").style.display  = "none";
-
-  console.log("Reset! Students array cleared.");
+  // Display results
+  document.getElementById("arrDisplay").textContent = "[" + values.join(", ") + "]";
+  document.getElementById("maxVal").textContent     = maxVal;
+  document.getElementById("minVal").textContent     = minVal;
+  resultDiv.style.display = "block";
 }
 ```
 
 ### Array Methods Used
 
-| Method        | Purpose                                                          |
-|---------------|------------------------------------------------------------------|
-| `map()`       | Converts student objects into table rows for display             |
-| `map()`       | Extracts `marks` from each student object into a plain array     |
-| `some()`      | Validates that no student has `NaN` marks                        |
-| `find()`      | Retrieves the student object that holds the max or min marks     |
-| `Math.max()`  | Finds the highest marks using the spread operator                |
-| `Math.min()`  | Finds the lowest marks using the spread operator                 |
+| Method        | Purpose                                              |
+|---------------|------------------------------------------------------|
+| `map()`       | Converts input strings into array of number objects  |
+| `map()`       | Extracts `value` from each object into a plain array |
+| `some()`      | Validates that no entry is `NaN`                     |
+| `Math.max()`  | Finds the largest number using spread operator       |
+| `Math.min()`  | Finds the smallest number using spread operator      |
 
 ### Output
-- User enters Student Name and Marks (0–100) and clicks **Add**
-- A table appears listing all added students
-- The **Find Highest and Lowest Scorer** button appears after at least 2 students are added
-- Clicking it shows two result cards side by side:
-  - **Highest Scorer** — student name and marks (green card)
-  - **Lowest Scorer** — student name and marks (red card)
-- **Reset** clears all data
-- The entire page fits on one screen with no scrolling
+- User types comma-separated numbers (e.g. `10, 25, 3, 47, 8`)
+- Clicking **Find Max & Min** shows:
+  - Numbers Array: `[10, 25, 3, 47, 8]`
+  - Maximum Value: **47**
+  - Minimum Value: **3**
+- Invalid input shows an error message in red
 
 ### Screenshot
 
 > **Screenshot:**
-> <img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/53f8082b-f7a9-4f3c-a784-214289b48eab" />
-
-
-> <img width="1907" height="1022" alt="image" src="https://github.com/user-attachments/assets/ea519977-a372-4b27-9151-8cdcf13d0747" />
-
-
+> <img width="1917" height="1015" alt="image" src="paste-your-github-image-url-here" />
 
 ---
 
@@ -503,5 +332,4 @@ function resetAll() {
 Both tasks were completed successfully:
 
 - **Task 5.1** demonstrated `forEach`, `map`, `filter`, and `reduce` through a Shopping Cart Calculator that dynamically adds products, computes totals, applies discounts, and lists expensive items.
-- **Task 5.2** demonstrated `map()`, `some()`, `find()`, `Math.max()`, and `Math.min()` through a Student Marks Analyser application that stores student data as an array of objects and identifies the highest and lowest scorer.
-
+- **Task 5.2** demonstrated `map()`, `some()`, `Math.max()`, and `Math.min()` by converting user-entered comma-separated numbers into an array of objects and finding the maximum and minimum values.
