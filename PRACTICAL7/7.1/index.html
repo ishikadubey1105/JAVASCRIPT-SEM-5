@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Case Study 7 - Event Handling in JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 25px 35px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .mandatory {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="url"],
+        select {
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+            border: 1px solid #999;
+            border-radius: 4px;
+        }
+
+        .dob-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dob-row select {
+            flex: 1;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 3px;
+            min-height: 14px;
+        }
+
+        .focused {
+            border: 2px solid #2196F3 !important;
+            background: #eef7ff;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        #successMsg {
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <p class="mandatory">*Mandatory to fill</p>
+
+        <form id="regForm" novalidate>
+
+            <div class="field">
+                <label for="firstname">Firstname *</label>
+                <input type="text" id="firstname" name="firstname">
+                <div class="error" id="err-firstname"></div>
+            </div>
+
+            <div class="field">
+                <label for="lastname">Lastname</label>
+                <input type="text" id="lastname" name="lastname">
+            </div>
+
+            <div class="field">
+                <label>Birthday</label>
+                <div class="dob-row">
+                    <select id="day">
+                        <option value="">Day</option>
+                    </select>
+                    <select id="month">
+                        <option value="">Month</option>
+                    </select>
+                    <select id="year">
+                        <option value="">Year</option>
+                    </select>
+                </div>
+                <div class="error" id="err-dob"></div>
+            </div>
+
+            <div class="field">
+                <label for="username">Username *</label>
+                <input type="text" id="username" name="username">
+                <div class="error" id="err-username"></div>
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+                <div class="error" id="err-email"></div>
+            </div>
+
+            <div class="field">
+                <label for="website">Website</label>
+                <input type="url" id="website" name="website">
+            </div>
+
+            <div class="field">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password">
+                <div class="error" id="err-password"></div>
+            </div>
+
+            <div class="field">
+                <label for="repassword">Re-password *</label>
+                <input type="password" id="repassword" name="repassword">
+                <div class="error" id="err-repassword"></div>
+            </div>
+
+            <div class="checkbox-row">
+                <input type="checkbox" id="terms">
+                <label for="terms" style="margin:0;font-weight:normal;">I agree to the terms &amp; conditions.</label>
+            </div>
+            <div class="error" id="err-terms"></div>
+
+            <button type="submit">Submit</button>
+            <p id="successMsg"></p>
+        </form>
+    </div>
+
+    <script>
+        // ---------- DOM ELEMENT ACCESS ----------
+        const form = document.getElementById("regForm");
+        const firstname = document.getElementById("firstname");
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const repassword = document.getElementById("repassword");
+        const terms = document.getElementById("terms");
+        const daySel = document.getElementById("day");
+        const monthSel = document.getElementById("month");
+        const yearSel = document.getElementById("year");
+        const successMsg = document.getElementById("successMsg");
+
+        // All text/email/password/url inputs (used for focus/blur styling)
+        const allInputs = document.querySelectorAll("input[type='text'], input[type='email'], input[type='url'], input[type='password'], select");
+
+        // ---------- POPULATE DAY / MONTH / YEAR (DOM manipulation) ----------
+        for (let d = 1; d <= 31; d++) {
+            daySel.appendChild(new Option(d, d));
+        }
+        const months = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+        months.forEach((m, i) => monthSel.appendChild(new Option(m, i + 1)));
+
+        const currentYear = new Date().getFullYear();
+        for (let y = currentYear; y >= currentYear - 100; y--) {
+            yearSel.appendChild(new Option(y, y));
+        }
+
+        // ---------- EVENT: FOCUS / BLUR (highlight active field) ----------
+        allInputs.forEach(input => {
+            input.addEventListener("focus", () => {
+                input.classList.add("focused");
+            });
+            input.addEventListener("blur", () => {
+                input.classList.remove("focused");
+            });
+        });
+
+        // ---------- HELPER ----------
+        function showError(id, message) {
+            document.getElementById(id).textContent = message;
+        }
+        function clearError(id) {
+            document.getElementById(id).textContent = "";
+        }
+
+        // ---------- EVENT: CHANGE (live validation as user edits) ----------
+        firstname.addEventListener("change", () => {
+            if (firstname.value.trim() === "") {
+                showError("err-firstname", "Firstname is required.");
+            } else {
+                clearError("err-firstname");
+            }
+        });
+
+        username.addEventListener("change", () => {
+            if (username.value.trim() === "") {
+                showError("err-username", "Username is required.");
+            } else {
+                clearError("err-username");
+            }
+        });
+
+        email.addEventListener("change", () => {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value.trim() !== "" && !pattern.test(email.value.trim())) {
+                showError("err-email", "Enter a valid email address.");
+            } else {
+                clearError("err-email");
+            }
+        });
+
+        repassword.addEventListener("change", () => {
+            if (repassword.value !== password.value) {
+                showError("err-repassword", "Passwords do not match.");
+            } else {
+                clearError("err-repassword");
+            }
+        });
+
+        // ---------- EVENT: SUBMIT (full validation) ----------
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let valid = true;
+
+            // Firstname
+            if (firstname.value.trim() === "") {
+                showError("err-firstname", "Firstname is required.");
+                valid = false;
+            } else {
+                clearError("err-firstname");
+            }
+
+            // Username
+            if (username.value.trim() === "") {
+                showError("err-username", "Username is required.");
+                valid = false;
+            } else {
+                clearError("err-username");
+            }
+
+            // Email (optional field, but validate format if filled)
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value.trim() !== "" && !emailPattern.test(email.value.trim())) {
+                showError("err-email", "Enter a valid email address.");
+                valid = false;
+            } else {
+                clearError("err-email");
+            }
+
+            // Date of birth
+            if (daySel.value === "" || monthSel.value === "" || yearSel.value === "") {
+                showError("err-dob", "Please select your full date of birth.");
+                valid = false;
+            } else {
+                clearError("err-dob");
+            }
+
+            // Password
+            if (password.value.trim() === "") {
+                showError("err-password", "Password is required.");
+                valid = false;
+            } else if (password.value.length < 6) {
+                showError("err-password", "Password must be at least 6 characters.");
+                valid = false;
+            } else {
+                clearError("err-password");
+            }
+
+            // Re-password
+            if (repassword.value.trim() === "") {
+                showError("err-repassword", "Please re-enter your password.");
+                valid = false;
+            } else if (repassword.value !== password.value) {
+                showError("err-repassword", "Passwords do not match.");
+                valid = false;
+            } else {
+                clearError("err-repassword");
+            }
+
+            // Terms checkbox
+            if (!terms.checked) {
+                showError("err-terms", "You must agree to the terms & conditions.");
+                valid = false;
+            } else {
+                clearError("err-terms");
+            }
+
+            // Final result
+            if (valid) {
+                successMsg.textContent = "Form submitted successfully!";
+                form.reset();
+            } else {
+                successMsg.textContent = "";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
