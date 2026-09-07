@@ -284,6 +284,7 @@ Department: Computer Science</textarea>
 
     </div>
 
+
     <script>
 
         function processText() {
@@ -309,7 +310,9 @@ Department: Computer Science</textarea>
 
             let emailStatus = emailValid
                 ? '<span class="badge valid">Valid</span>'
+
                 : '<span class="badge invalid">Invalid</span>';
+                
 
             let phoneRegex = /^\d{10}$/;
 
@@ -393,6 +396,7 @@ Department: Computer Science</textarea>
             <div class="result-section-title">After Department Replacement</div>
             <div class="text-block">${replacedText}</div>
         </div>
+
 
     `;
 

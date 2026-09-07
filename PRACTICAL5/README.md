@@ -258,7 +258,7 @@ Create an array of objects from user input and find the Maximum and Minimum valu
 
 #### `5.2/script.js`
 ```js
-// Task 5.2 – Find Max & Min from Array of Objects (user input)
+
 
 function findMaxMin() {
   const input      = document.getElementById("inputNumbers").value.trim();
